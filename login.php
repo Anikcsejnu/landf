@@ -1,3 +1,8 @@
+<?php 
+require_once 'vendor/autoload.php';
+
+?>
+
 <!DOCTYPE html>
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.2
@@ -149,7 +154,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </form>
             <!-- END FORGOT PASSWORD FORM -->
             <!-- BEGIN REGISTRATION FORM -->
-            <form class="register-form" action="index.html" method="post">
+            <form class="register-form" action="src/users/register_process.php" method="post">
                 <h2 style="color:black;">Sign Up</h2>
                 <p style="color:black;">Enter your personal details below:</p>
                 <div class="form-group">

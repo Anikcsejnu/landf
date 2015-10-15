@@ -23,9 +23,11 @@ Admin User:
 -----------
 => Profile Setting 
 => Add new user 
+	=> User role set korte parbe
 => User list 
 	=> Eidt, delte, block 
+=> Product List
 
 Note: 
 ========
-login form er data receve korte hobe login process
+Normal User Profile Update theke kaj kora. 

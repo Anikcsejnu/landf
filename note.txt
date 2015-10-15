@@ -1,0 +1,27 @@
+login er por logo te kno link thakbe na. 
+
+
+changed background image of index.php
+___________________
+|	          |					
+|  Initial Plan   |
+|_________________|
+
+=> User Registration
+	2 ta table a ek shate data insert hote hobe. 
+=> User Login
+=> Normal User go dashboard, admin go admin.php
+
+Normal User:
+------------
+=> Profile Setting 
+=> List of Existing Product 
+	=> View, Edit, Delete
+=> Add new product 
+
+Admin User:
+-----------
+=> Profile Setting 
+=> Add new user 
+=> User list 
+	=> Eidt, delte, block 

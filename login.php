@@ -469,6 +469,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         Sign Up <i class="m-icon-swapright m-icon-white"></i>
                     </button>
                 </div>
+                <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>">
             </form>
             <!-- END REGISTRATION FORM -->
         </div>

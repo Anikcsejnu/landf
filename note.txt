@@ -25,3 +25,7 @@ Admin User:
 => Add new user 
 => User list 
 	=> Eidt, delte, block 
+
+Note: 
+========
+login form er data receve korte hobe login process

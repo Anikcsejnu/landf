@@ -1,6 +1,6 @@
-<?php 
+<?php
 require_once 'vendor/autoload.php';
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +66,17 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN LOGIN -->
         <div class="content">
             <!-- BEGIN LOGIN FORM -->
-            <form class="login-form" action="index.html" method="post">
+            <p style="color:red; align:center"><b>
+                    <?php
+                    if (isset($_SESSION['invalid']) && !empty($_SESSION['invalid'])) {
+                        echo $_SESSION['invalid'];
+                        unset($_SESSION['invalid']);
+                    }
+                    ?>
+
+                </b>
+            </p>
+            <form class="login-form" action="src/Users/login_process.php" method="post">
                 <h2 class="form-title" style="color:black;">Login to your account</h2>
                 <div class="alert alert-danger display-hide">
                     <button class="close" data-close="alert"></button>

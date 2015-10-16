@@ -33,7 +33,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                             
                             <ul class="nav pull-right">
                                 
-                                <li><a href="#">Support </a></li>
+                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username'];?></b> </a></li>
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>

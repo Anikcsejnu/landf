@@ -30,4 +30,4 @@ Admin User:
 
 Note: 
 ========
-Normal User Profile Update theke kaj kora. 
+add product nea kaj kora. 

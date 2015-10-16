@@ -106,7 +106,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
 
                                         <br />
 
-                                        <form class="form-horizontal row-fluid">
+                                        <form action="src/profiles/profile_update.php" method="POST" class="form-horizontal row-fluid">
                                             <div class="control-group">
                                                 <label class="control-label" for="first_name">First Name</label>
                                                 <div class="controls">

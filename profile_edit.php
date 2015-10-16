@@ -121,7 +121,11 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
 
                                         <br />
 
+<<<<<<< HEAD
                                         <form action="src/Profile/profile_update.php" method="POST" class="form-horizontal row-fluid">
+=======
+                                        <form action="src/profiles/profile_update.php" method="POST" class="form-horizontal row-fluid">
+>>>>>>> 520b3dedef1a9649140561ce309edde1fd520524
                                             <div class="control-group">
                                                 <label class="control-label" for="first_name">First Name</label>
                                                 <div class="controls">

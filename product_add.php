@@ -101,17 +101,17 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                             <div class="content">
                                 <div class="module">
                                     <div class="module-head">
-                                        <h3>Edit Profile</h3>
+                                        <h3>Add Product</h3>
                                     </div>
                                     <div class="module-body">
-                                        <?php if (isset($_SESSION['profile_update_success']) && !empty($_SESSION['profile_update_success'])) { ?>
+                                        <?php if (isset($_SESSION['product_add_success']) && !empty($_SESSION['product_add_success'])) { ?>
                                             <div class="alert alert-success">
                                                 <button type="button" class="close" data-dismiss="alert">×</button>
 
                                                 <strong>
                                                     <?php
-                                                    echo $_SESSION['profile_update_success'];
-                                                    unset($_SESSION['profile_update_success'])
+                                                    echo $_SESSION['product_add_success'];
+                                                    unset($_SESSION['product_add_success'])
                                                     ?>
                                                 </strong> 
 
@@ -120,109 +120,35 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                         ?>
 
                                         <br />
-
-                                        <form action="src/Profile/profile_update.php" method="POST" class="form-horizontal row-fluid">
-
-                                        <form action="src/profiles/profile_update.php" method="POST" class="form-horizontal row-fluid">
+                                        <form action="src/Product/product_add_process.php" method="POST" class="form-horizontal row-fluid">
 
                                             <div class="control-group">
-                                                <label class="control-label" for="first_name">First Name</label>
+                                                <label class="control-label" for="title">Product Title</label>
                                                 <div class="controls">
-                                                    <input type="text" name="first_name" id="first_name" placeholder="First Name goes Here" class="span8" value="<?php
-                                                    if (isset($my_profile['first_name'])) {
-                                                        echo $my_profile['first_name'];
-                                                    }
-                                                    ?>"/>
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="last_name">Last Name</label>
-                                                <div class="controls">
-                                                    <input type="text" name="last_name" id="last_name" value="<?php
-                                                    if (isset($my_profile['last_name'])) {
-                                                        echo $my_profile['last_name'];
-                                                    }
-                                                    ?>" placeholder="Last Name goes Here" class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="password">Password</label>
-                                                <div class="controls">
-                                                    <input type="password" name="password" id="password" value="<?php
-                                                    if (isset($my_profile['password'])) {
-                                                        echo $my_profile['password'];
-                                                    }
-                                                    ?>" placeholder="Put Your New Password" class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="mobile_number">Mobile Number</label>
-                                                <div class="controls">
-                                                    <input type="text" name="mobile_number" id="mobile_number" value="<?php
-                                                    if (isset($my_profile['mobile_number'])) {
-                                                        echo $my_profile['mobile_number'];
-                                                    }
-                                                    ?>" placeholder="Ex : 01717613327" class="span8">
+                                                    <input type="text" name="title" id="title" placeholder="Product Title" class="span8"/>
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
 
+
                                             <div class="control-group">
-                                                <label class="control-label" for="address">Address</label>
+                                                <label class="control-label" for="address">Product Description</label>
                                                 <div class="controls">
-                                                    <textarea name="address" id="address"  class="span8" rows="5"><?php
-                                                    if (isset($my_profile['address'])) {
-                                                        echo $my_profile['address'];
-                                                    }
-                                                    ?></textarea>
+                                                    <textarea name="description" id="description"  class="span8" rows="5"></textarea>
                                                 </div>
                                             </div>
+
                                             <div class="control-group">
-                                                <label class="control-label" for="zip_code">Zip Code</label>
+                                                <label class="control-label" for="product_picture">Product Picture</label>
                                                 <div class="controls">
-                                                    <input type="text" name="zip_code" id="zip_code" value="<?php
-                                                           if (isset($my_profile['zip_code'])) {
-                                                               echo $my_profile['zip_code'];
-                                                           }
-                                                           ?>" placeholder="Ex : 1203" class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="city">City</label>
-                                                <div class="controls">
-                                                    <input type="text" name="city" id="zip_code" value="<?php
-                                                           if (isset($my_profile['city'])) {
-                                                               echo $my_profile['city'];
-                                                           }
-                                                           ?>" placeholder="Dhaka" class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="district">District</label>
-                                                <div class="controls">
-                                                    <input type="text" name="district" id="district" value="<?php
-                                                           if (isset($my_profile['district'])) {
-                                                               echo $my_profile['district'];
-                                                           }
-                                                           ?>" placeholder="Dhaka" class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="profile_picture">Profile Picture</label>
-                                                <div class="controls">
-                                                    <input type="file" name="profile_picture" id="profile_picture"  class="span8">
+                                                    <input type="file" name="product_picture" id="product_picture"  class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <button type="submit" class="btn">Update Profile</button>
+                                                    <button type="submit" class="btn">Add Product</button>
+                                                    <input type="hidden" name="product_code" id="product_code" value="<?php echo uniqid(); ?>"/>
                                                     <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>">
                                                 </div>
                                             </div>

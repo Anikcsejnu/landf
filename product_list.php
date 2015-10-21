@@ -1,18 +1,15 @@
 <?php
 require_once 'vendor/autoload.php';
 session_start();
-use App\Users\Users;
-use App\Profile\Profiles;
+use App\Product\Products;
 use App\utility;
 
 $debug = new utility();
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    $profile = new Profiles();
-    $my_profile = $profile->User_Profile($_SESSION['user_id']);
-//    echo $my_profile['first_name'];
-//    $debug->debug($my_profile);
-//    die();
+    $products = new Products();
+    $all_products = $products->find_all_product($_SESSION['user_id']);
+//    $debug->debug($all_products);
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -111,6 +108,30 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <td>Produt Code</td>
                                                 <td>Action</td>
                                             </tr>
+                                            <?php
+    if (isset($all_products) && !empty($all_products)) {
+        foreach ($all_products as $product) {
+
+
+            ?>
+            <tr>
+                <td><?php echo $product['id'] ?></td>
+                <td><?php echo $product['title'] ?></td>
+                <td><?php echo $product['product_code'] ?></td>
+                <td>
+                    <a href="product_details.php?id=<?php echo $product['id']; ?>">Details</a> |
+                    <a href="product_edit.php?id=<?php echo $product['id']; ?>">Edit</a> |
+                    <a href="product_delete.php?id=<?php echo $product['id']; ?>">Delete</a>
+                </td>
+            </tr>
+        <?php }
+    } else { ?>
+        <tr>
+            <td colspan="4">
+                <?php echo "No available product "; ?>
+            </td>
+        </tr>
+    <?php } ?>
                                         </table>
                                     </div>
                                 </div>

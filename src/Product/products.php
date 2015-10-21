@@ -43,4 +43,19 @@ class Products
             echo 'ERROR: ' . $e->getMessage();
         }
     }
+    public function find_all_product($user_id){
+        try {
+        $this->user_id = $user_id;
+
+            $query = "SELECT * FROM `products` WHERE `products`.`user_id`=".$this->user_id;
+            $result = $this->conn->query($query);
+            foreach ($result as $row) {
+                $this->data[] = $row;
+            }
+
+            return $this->data;
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
 }

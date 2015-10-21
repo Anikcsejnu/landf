@@ -3,14 +3,14 @@ require_once 'vendor/autoload.php';
 session_start();
 use App\Users\Users;
 use App\Profile\Profiles;
+use App\Product\Products;
 use App\utility;
-
+//echo $_GET['id'];
 $debug = new utility();
-
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    $profile = new Profiles();
-    $my_profile = $profile->User_Profile($_SESSION['user_id']);
-//    echo $my_profile['first_name'];
+    $product = new Products();
+    $product_eidt = $product->find_one_product($_GET['id']);
+
 //    $debug->debug($my_profile);
 //    die();
     ?>
@@ -101,17 +101,17 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                             <div class="content">
                                 <div class="module">
                                     <div class="module-head">
-                                        <h3>Edit Profile</h3>
+                                        <h3>Edit Product</h3>
                                     </div>
                                     <div class="module-body">
-                                        <?php if (isset($_SESSION['product_add_success']) && !empty($_SESSION['product_add_success'])) { ?>
+                                        <?php if (isset($_SESSION['product_update_success']) && !empty($_SESSION['product_update_success'])) { ?>
                                             <div class="alert alert-success">
                                                 <button type="button" class="close" data-dismiss="alert">×</button>
 
                                                 <strong>
                                                     <?php
-                                                    echo $_SESSION['product_add_success'];
-                                                    unset($_SESSION['product_add_success'])
+                                                    echo $_SESSION['product_update_success'];
+                                                    unset($_SESSION['product_update_success'])
                                                     ?>
                                                 </strong> 
 
@@ -120,14 +120,14 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                         ?>
 
                                         <br />
-                                        <form action="src/Product/product_add_process.php" method="POST" class="form-horizontal row-fluid">
+                                        <form action="src/Product/product_edit_process.php" method="POST" class="form-horizontal row-fluid">
 
                                             <div class="control-group">
-                                                <label class="control-label" for="first_name">Product Title</label>
+                                                <label class="control-label" for="title">Product Title</label>
                                                 <div class="controls">
-                                                    <input type="text" name="first_name" id="first_name" placeholder="First Name goes Here" class="span8" value="<?php
-                                                    if (isset($my_profile['first_name'])) {
-                                                        echo $my_profile['first_name'];
+                                                    <input type="text" name="title" id="first_name" placeholder="Title" class="span8" value="<?php
+                                                    if (isset($product_eidt['title'])) {
+                                                        echo $product_eidt['title'];
                                                     }
                                                     ?>"/>
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
@@ -136,11 +136,11 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
 
 
                                             <div class="control-group">
-                                                <label class="control-label" for="address">Address</label>
+                                                <label class="control-label" for="address">Description</label>
                                                 <div class="controls">
-                                                    <textarea name="address" id="address"  class="span8" rows="5"><?php
-                                                    if (isset($my_profile['address'])) {
-                                                        echo $my_profile['address'];
+                                                    <textarea name="description" id="description"  class="span8" rows="5"><?php
+                                                    if (isset($product_eidt['description'])) {
+                                                        echo $product_eidt['description'];
                                                     }
                                                     ?></textarea>
                                                 </div>
@@ -155,8 +155,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                             </div>
                                             <div class="control-group">
                                                 <div class="controls">
-                                                    <button type="submit" class="btn">Add Product</button>
-                                                    <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                                    <button type="submit" class="btn">Update Product Info</button>
+                                                    <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>"/>
+                                                    <input type="hidden" name="id" id="id" value="<?php echo $product_eidt['id']; ?>"/>
+                                                    <input type="hidden" name="product_code" id="product_code" value="<?php echo $_GET['id'];?>"/>
                                                 </div>
                                             </div>
                                         </form>

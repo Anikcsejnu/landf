@@ -6,7 +6,6 @@ use App\Profile\Profiles;
 use App\utility;
 
 $debug = new utility();
-
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $profile = new Profiles();
     $my_profile = $profile->User_Profile($_SESSION['user_id']);
@@ -33,7 +32,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                            <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html"><img src="assets/admin/layout3/img/mylogo2.png"</a>
+                            <i class="icon-reorder shaded"></i></a><a class="brand" href="dashboard.php"><img src="assets/admin/layout3/img/mylogo2.png"</a>
                         <div class="nav-collapse collapse navbar-inverse-collapse">
                             <ul class="nav nav-icons">
                                 <a href="#"><i ></i> </a></li>

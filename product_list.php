@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                            <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html"><img src="assets/admin/layout3/img/mylogo2.png"</a>
+                            <i class="icon-reorder shaded"></i></a><a class="brand" href="dashboard.php"><img src="assets/admin/layout3/img/mylogo2.png"</a>
                         <div class="nav-collapse collapse navbar-inverse-collapse">
                             <ul class="nav nav-icons">
                                 <a href="#"><i ></i> </a></li>
@@ -119,16 +119,16 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 <td><?php echo $product['title'] ?></td>
                 <td><?php echo $product['product_code'] ?></td>
                 <td>
-                    <a href="product_details.php?id=<?php echo $product['id']; ?>">Details</a> |
-                    <a href="product_edit.php?id=<?php echo $product['id']; ?>">Edit</a> |
-                    <a href="product_delete.php?id=<?php echo $product['id']; ?>">Delete</a>
+                    <a href="product_view.php?id=<?php echo $product['product_code']; ?>">Details</a> |
+                    <a href="product_edit.php?id=<?php echo $product['product_code']; ?>">Edit</a> |
+                    <a href="src/Product/product_delete.php?id=<?php echo $product['product_code']; ?>">Delete</a>
                 </td>
             </tr>
         <?php }
     } else { ?>
-        <tr>
-            <td colspan="4">
-                <?php echo "No available product "; ?>
+        <tr >
+            <td colspan="4" align="center">
+                <?php echo "<b>". "No available product ". "<b/>"; ?>
             </td>
         </tr>
     <?php } ?>

@@ -1,8 +1,16 @@
 <?php
 require_once 'vendor/autoload.php';
 session_start();
+use App\Product\Products;
+use App\utility;
 
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+$debug = new utility();
+
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+    $product_id = $_GET['id'];
+    $products = new Products();
+    $row = $products->find_one_product($product_id);
+//    $debug->debug($row) & die();
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -10,7 +18,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>Dashboard | Lost & Found</title>
+            <title>Edit Profile | Lost & Found</title>
             <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
             <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
             <link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -23,22 +31,22 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                            <i class="icon-reorder shaded"></i></a><a class="brand" href="dashboard.php"><img src="assets/admin/layout3/img/mylogo2.png"</a>
+                            <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html"><img src="assets/admin/layout3/img/mylogo2.png"</a>
                         <div class="nav-collapse collapse navbar-inverse-collapse">
                             <ul class="nav nav-icons">
                                 <a href="#"><i ></i> </a></li>
-<!--                                <li><a href="#"><i class="icon-eye-open"></i></a></li>
+    <!--                                <li><a href="#"><i class="icon-eye-open"></i></a></li>
                                 <li><a href="#"><i class="icon-bar-chart"></i></a></li>-->
                             </ul>
-                            
+
                             <ul class="nav pull-right">
-                                
-                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username'];?></b> </a></li>
+
+                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username']; ?></b> </a></li>
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.php?user=<?php echo $_SESSION['username'];?>">Your Profile</a></li>
+                                        <li><a href="profile.php?user=<?php echo $_SESSION['username']; ?>">Your Profile</a></li>
                                         <li><a href="profile_edit.php">Edit Profile</a></li>
                                         <li><a href="account_setting.php">Account Settings</a></li>
                                         <li class="divider"></li>
@@ -78,7 +86,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                                             </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                                             </i>More Pages </a>
                                         <ul id="togglePages" class="collapse unstyled">
-                                            <li><a href=""profile.php?user=<?php echo $_SESSION['username'];?>""><i class="icon-inbox"></i>Profile </a></li>
+                                            <li><a href=""><i class="icon-inbox"></i>Profile </a></li>
                                         </ul>
                                     </li>
                                     <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -89,67 +97,76 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                         <!--/.span3-->
                         <div class="span9">
                             <div class="content">
-                                <div class="btn-controls">
-                                    <div class="btn-box-row row-fluid">
-                                        <div class="span8">
-                                            <div class="row-fluid">
-                                                <div class="span12">
-                                                    <a href="#" class="btn-box small span4"><i class="icon-envelope"></i><b>Messages</b>
-                                                    </a><a href="profile.php?user=<?php echo $_SESSION['username'];?>" class="btn-box small span4"><i class="icon-group"></i><b>Profile</b>
-                                                    </a><a href="#" class="btn-box small span4"><i class="icon-exchange"></i><b>Expenses</b>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="row-fluid">
-                                                <div class="span12">
-                                                    <a href="#" class="btn-box small span4"><i class="icon-save"></i><b>Total Sales</b>
-                                                    </a><a href="#" class="btn-box small span4"><i class="icon-bullhorn"></i><b>Social Feed</b>
-                                                    </a><a href="#" class="btn-box small span4"><i class="icon-sort-down"></i><b>Bounce
-                                                            Rate</b> </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="widget widget-usage unstyled span4">
-                                            <li>
-                                                <p>
-                                                    <strong>Profile Complete</strong> <span class="pull-right small muted">78%</span>
-                                                </p>
-                                                <div class="progress tight">
-                                                    <div class="bar" style="width: 78%;">
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <p>
-                                                    <strong>Activity</strong> <span class="pull-right small muted">56%</span>
-                                                </p>
-                                                <div class="progress tight">
-                                                    <div class="bar bar-success" style="width: 56%;">
-                                                    </div>
-                                                </div>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="module hide">
+                                <div class="module">
                                     <div class="module-head">
-                                        <h3>
-                                            Adjust Budget Range</h3>
+                                        <h3>All Product</h3>
                                     </div>
                                     <div class="module-body">
-                                        <div class="form-inline clearfix">
-                                            <a href="#" class="btn pull-right">Update</a>
-                                            <label for="amount">
-                                                Price range:</label>
-                                            &nbsp;
-                                            <input type="text" id="amount" class="input-" />
-                                        </div>
-                                        <hr />
-                                        <div class="slider-range">
-                                        </div>
+                                    <?php if (isset($row) && !empty($row)) { ?>
+        <td>
+            <dl>
+                <dt>Product ID</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('id', $row) && !empty($row['id'])) {
+                        echo $row ['id'];
+                    } else {
+                        echo "No Description available";
+                    }
+                    ?>
+                </dd>
+
+                <dt>Title</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('title', $row) && !empty($row['title'])) {
+                        echo $row ['title'];
+                    } else {
+                        echo "No Description available";
+                    }
+                    ?>
+                </dd>
+                <dt>Description</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('description', $row) && !empty($row['description'])) {
+                        echo $row ['description'];
+                    } else {
+                        echo "No Description available";
+                    }
+                    ?>
+                </dd>
+                <dt>Product Code</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('product_code', $row) && !empty($row['product_code'])) {
+                        echo $row ['product_code'];
+                    } else {
+                        echo "No product code available";
+                    }
+                    ?>
+                </dd>
+
+                <dt>Product Image</dt>
+                <dd>
+                    <?php
+                    echo "No image available";
+                    ?>
+                </dd><br/>
+                <dd>
+                    <a href="product_list.php">List</a> |
+                    <a href="product_edit.php?id=<?php echo $row ['product_code']; ?>">Edit</a> |
+                    <a href="src/Product/product_delete.php?id=<?php echo $row ['product_code']; ?>">Delete</a>
+                </dd>
+            </dl>
+        </td>
+    <?php }
+    else{
+        echo "<p style='color:#ff4634'>" ." Opps ! Something Going Wrong ! Please try again later"."</p>";
+    }?>
                                     </div>
                                 </div>
+
                                 <!--/.module-->
                             </div>
                             <!--/.content-->

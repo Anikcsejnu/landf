@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                            <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html"><img src="assets/admin/layout3/img/mylogo2.png"</a>
+                            <i class="icon-reorder shaded"></i></a><a class="brand" href="dashboard.php"><img src="assets/admin/layout3/img/mylogo2.png"</a>
                         <div class="nav-collapse collapse navbar-inverse-collapse">
                             <ul class="nav nav-icons">
                                 <a href="#"><i ></i> </a></li>
@@ -111,8 +111,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <strong>
                                                     <?php
                                                     echo $_SESSION['product_add_success'];
-                                                    unset($_SESSION['product_add_success'])
+                                                    unset($_SESSION['product_add_success']);
                                                     ?>
+                                                    <p style="color:#00007d"><a href="product_list.php">See Your Product List</a></p>
                                                 </strong> 
 
                                             </div>

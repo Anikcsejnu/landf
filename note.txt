@@ -32,7 +32,8 @@ Admin User:
 Note: 
 ========
 *CRUD With product
-
 product insert korar shomoy emty data deleo jasse. atake handle kora. 
 product add korar por je code ta debe oi code ta print er jonno message debe
 profile edit korar por profile.php?user=username page e redirect hobe. & same page a again edit profile button thakbe.
+product details theke print option
+product delete korar time e "are you sure you want to delete" ai message gulo dekhate hobe. 

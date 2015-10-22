@@ -4,11 +4,18 @@ session_start();
 use App\Product\Products;
 use App\utility;
 
-$debug = new utility();
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $products = new Products();
-    $all_products = $products->find_all_product($_SESSION['user_id']);
+
+
+    if (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1)) {
+        $all_products = $products->find_all_product($_SESSION['admin']);
+        $_SESSION['number_of_row'] = $products->number_of_row_product();
+//        print_r($data);
+    } else {
+        $all_products = $products->find_all_product($_SESSION['user_id']);
+    }
 //    $debug->debug($all_products);
     ?>
     ﻿<!DOCTYPE html>
@@ -68,7 +75,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                 <ul class="widget widget-menu unstyled">
                                     <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
                                     <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"> 19</b></a></li>
+                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"><?php if (isset($_SESSION['admin'])) {
+                                        echo $_SESSION['number_of_row'];
+                                    } ?></b></a>
+                                    </li>
                                     <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
                                 </ul>
                                 <!--/.widget-nav-->
@@ -103,7 +113,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     <div class="module-body">
                                         <table class="table">
                                             <tr>
-                                                <td> Product ID   </td>
+                                            <td>Product ID</td>
                                                 <td>Product Name</td>
                                                 <td>Produt Code</td>
                                                 <td>Action</td>
@@ -126,9 +136,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
             </tr>
         <?php }
     } else { ?>
-        <tr >
+        <tr>
             <td colspan="4" align="center">
-                <?php echo "<b>". "No available product ". "<b/>"; ?>
+                <?php echo "<b>" . "No available product " . "<b/>"; ?>
             </td>
         </tr>
     <?php } ?>

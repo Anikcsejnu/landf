@@ -1,6 +1,7 @@
 <?php
-namespace App\Product;
 
+namespace App\Product;
+//session_start();
 
 class Products
 {
@@ -46,18 +47,27 @@ class Products
         }
     }
 
-    public function find_all_product($user_id)
+    public function find_all_product($user_id = '')
     {
         try {
             $this->user_id = $user_id;
+            if (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1)) {
+                $query = "SELECT * FROM `products`";
+                $result = $this->conn->query($query);
+                foreach ($result as $row) {
+                    $this->data[] = $row;
+                }
+                return $this->data;
+            } else {
+                $query = "SELECT * FROM `products` WHERE `products`.`user_id`=" . $this->user_id;
+                $result = $this->conn->query($query);
+                foreach ($result as $row) {
+                    $this->data[] = $row;
+                }
 
-            $query = "SELECT * FROM `products` WHERE `products`.`user_id`=" . $this->user_id;
-            $result = $this->conn->query($query);
-            foreach ($result as $row) {
-                $this->data[] = $row;
+                return $this->data;
             }
 
-            return $this->data;
         } catch (PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();
         }
@@ -99,6 +109,20 @@ class Products
         }
     }
 
+    public function number_of_row_product($id = '')
+    {
+        try {
+            $this->id = $id;
+            $sql = "SELECT * FROM `products`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->rowCount();
+            header('location:../../product_list.php');
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
+
     public function product_delete($product_code)
     {
         try {
@@ -108,9 +132,9 @@ class Products
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(array('product_code' => $this->product_code));
             header('location:../../product_list.php');
-        }
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();
         }
     }
+
 }

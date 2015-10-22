@@ -29,7 +29,7 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
             $_SESSION['user_id'] = $result['id'];
             $_SESSION['username'] = $result['username'];
             $_SESSION['admin'] = $result['is_admin'];
-            header('location:admin.php');
+            header('location:../../admin.php');
         } else {
             session_start();
             $_SESSION['invalid'] = "Invalid Username or Password !";

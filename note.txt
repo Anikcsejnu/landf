@@ -16,10 +16,10 @@ Normal User:
 ------------
 => Profile Setting (done)
 	should be remove password from profile setting
-=> List of Existing Product 
+=> List of Existing Product (done)
 	=> View, Edit, Delete
-=> Add new product 
-=> Account setting change email and pass
+=> Add new product (done)
+=> Account setting change email and pass (later)
 Admin User:
 -----------
 => Profile Setting 
@@ -31,7 +31,19 @@ Admin User:
 
 Note: 
 ========
-*CRUD With product
+Target :
+User Story of project 
+Use case of project 
+
+
+see all products list
+Design admin page
+profile setting
+add new user as normal user and admin also 
+ 
+
+
+
 product insert korar shomoy emty data deleo jasse. atake handle kora. 
 product add korar por je code ta debe oi code ta print er jonno message debe
 profile edit korar por profile.php?user=username page e redirect hobe. & same page a again edit profile button thakbe.

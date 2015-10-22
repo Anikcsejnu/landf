@@ -1,8 +1,10 @@
 <?php
 require_once 'vendor/autoload.php';
+use App\Product\Products;
 session_start();
-
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin']==1)) {
+    $products = new Products();
+        $_SESSION['number_of_row'] = $products->number_of_row_product();
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -10,7 +12,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>Dashboard | Lost & Found</title>
+            <title>Admin | Lost & Found</title>
             <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
             <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
             <link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -37,17 +39,18 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                                 </button>
                             </form>-->
                             <ul class="nav pull-right">
-                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+                            <li><a href="">Welcome,<b> <?php echo $_SESSION['username']; ?></b> </a></li>
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Notification ( 10 )
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Item No. 1</a></li>
-                                        <li><a href="#">Don't Click</a></li>
+                                        <li><a href="#">Message-1</a></li>
+                                        <li><a href="#">Message-1</a></li>
                                         <li class="divider"></li>
-                                        <li class="nav-header">Example Header</li>
-                                        <li><a href="#">A Separated link</a></li>
+<!--                                        <li class="nav-header">Example Header</li>-->
+                                        <li><a href="#">Reply to all user</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="support.php">Support </a></li>
+
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>
@@ -74,25 +77,29 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
                                     <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product</a></li>
-                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added <b class="label orange pull-right"> 19</b> </a></li>
+                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"><?php if (isset($_SESSION['admin'])) {echo $_SESSION['number_of_row'] ;} ?></b></a></li>
+                                    <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+
+                                    <li><a href="add_new_user.php"><i class="menu-icon icon-list"></i>Add New User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+                                    <li><a href="user_list.php"><i class="menu-icon icon-list"></i>Block User <b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+                                    <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+
                                 </ul>
                                 <!--/.widget-nav-->
 
 
                                 <ul class="widget widget-menu unstyled">
-                                    <li><a href="#"><i class="menu-icon icon-bold"></i> Share Your Experience </a></li>
+                                    <li><a href="#"><i class="menu-icon icon-bold"></i> Send Message to Users </a></li>
                                     <li><a href="#"><i class="menu-icon icon-book"></i>Add Blog Post </a></li>
-                                    <li><a href="#"><i class="menu-icon icon-paste"></i>Suggest to admin </a></li>
                                 </ul>
                                 <!--/.widget-nav-->
                                 <ul class="widget widget-menu unstyled">
                                     <li><a class="collapsed" data-toggle="collapse" href="#togglePages"><i class="menu-icon icon-cog">
                                             </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                                            </i>More Pages </a>
+                                            </i> Setting </a>
                                         <ul id="togglePages" class="collapse unstyled">
-                                            <li><a href=""><i class="icon-inbox"></i>Profile </a></li>
+                                            <li><a href="profile_edit.php"><i class="icon-inbox"></i>Profile </a></li>
+                                            <li><a href=""><i class="icon-inbox"></i>Account </a></li>
                                         </ul>
                                     </li>
                                     <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>

@@ -2,8 +2,9 @@
 require_once 'vendor/autoload.php';
 session_start();
 
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    ?>
+if (!isset($_SESSION['admin'])) {
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
         <head>
@@ -33,12 +34,12 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                             
                             <ul class="nav pull-right">
                                 
-                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username'];?></b> </a></li>
+                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username']; ?></b> </a></li>
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="profile.php?user=<?php echo $_SESSION['username'];?>">Your Profile</a></li>
+                                        <li><a href="profile.php?user=<?php echo $_SESSION['username']; ?>">Your Profile</a></li>
                                         <li><a href="profile_edit.php">Edit Profile</a></li>
                                         <li><a href="account_setting.php">Account Settings</a></li>
                                         <li class="divider"></li>
@@ -78,7 +79,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                                             </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                                             </i>More Pages </a>
                                         <ul id="togglePages" class="collapse unstyled">
-                                            <li><a href=""profile.php?user=<?php echo $_SESSION['username'];?>""><i class="icon-inbox"></i>Profile </a></li>
+                                            <li><a href=""profile.php?user=<?php echo $_SESSION['username']; ?>""><i class="icon-inbox"></i>Profile </a></li>
                                         </ul>
                                     </li>
                                     <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -95,7 +96,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
                                             <div class="row-fluid">
                                                 <div class="span12">
                                                     <a href="#" class="btn-box small span4"><i class="icon-envelope"></i><b>Messages</b>
-                                                    </a><a href="profile.php?user=<?php echo $_SESSION['username'];?>" class="btn-box small span4"><i class="icon-group"></i><b>Profile</b>
+                                                    </a><a href="profile.php?user=<?php echo $_SESSION['username']; ?>" class="btn-box small span4"><i class="icon-group"></i><b>Profile</b>
                                                     </a><a href="#" class="btn-box small span4"><i class="icon-exchange"></i><b>Expenses</b>
                                                     </a>
                                                 </div>
@@ -176,8 +177,13 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         </body>
     </html>
     <?php
+
+    } else {
+        $_SESSION['invalid'] = "Access Denied ! Please login for continue";
+        header('location:login.php');
+    }
 } else {
     $_SESSION['invalid'] = "Access Denied ! Please login for continue";
-    header('location:login.php');
+    header('location:admin.php');
 }
 ?>

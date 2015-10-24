@@ -125,6 +125,20 @@ class Users
         }
     }
 
+    public function user_delete($user_id)
+    {
+        try {
+            $this->id = $user_id;
+
+            $sql = "DELETE FROM `users` WHERE `id` =:id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute(array('id' => $this->id));
+            header('location:../../user_list.php');
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
+
     public function update_password($id, $password)
     {
         try {

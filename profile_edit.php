@@ -5,9 +5,10 @@ use App\Users\Users;
 use App\Profile\Profiles;
 use App\utility;
 
-echo $_SESSION['user_id'];
+//echo $_SESSION['user_id'];
 $debug = new utility();
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $profile = new Profiles();
         $my_profile = $profile->User_Profile($_GET['id']);

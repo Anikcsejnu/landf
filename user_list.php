@@ -126,7 +126,7 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
                 <td><?php if($user['is_admin']==1){echo "<b style='color:red'>"."Yes"."</b>";} else{ echo "No"; }?></td>
                 <td>
                     <a href="user_details.php?id=<?php echo $user['id']; ?>">Details</a> |
-                    <a href="profile_edit.php?id=<?php echo $user['id'] ?>">Edit</a> |
+                    <a href="profile_edit.php?id=<?php echo  $user['id'] ?>">Edit</a> |
                     <a href="src/Users/user_delete.php?id=<?php echo $user['id'] ?>">Delete</a>
                 </td>
             </tr>

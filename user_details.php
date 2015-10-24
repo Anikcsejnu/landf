@@ -187,6 +187,16 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
                     }
                     ?>
                 </dd>
+                <dt>Last Name</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('last_name', $user) && !empty($user['last_name'])) {
+                        echo $user ['last_name'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
                 <dt>Mobile Number</dt>
                 <dd>
                     <?php

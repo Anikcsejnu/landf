@@ -27,12 +27,13 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         } else {
             $user_id = $_SESSION['user_id'];
         }
+        $password_update = new Users();
+        $password_update->update_password($user_id, $password);
 
         $obj2 = new Profiles();
         $obj2->update_profile($user_id, $first_name, $last_name, $password, $mobile_number, $address, $zip_code, $city, $district, $modified);
 
-        $password_update = new Users();
-        $password_update->update_password($user_id, $password);
+
 
     } else {
         header('location:../../dashboard.php');

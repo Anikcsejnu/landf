@@ -5,6 +5,7 @@ use App\Users\Users;
 use App\Profile\Profiles;
 use App\Product\Products;
 use App\utility;
+
 //echo $_GET['id'];
 $debug = new utility();
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
@@ -43,7 +44,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
 
                             <ul class="nav pull-right">
 
-                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username'];?></b> </a></li>
+                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username']; ?></b> </a></li>
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>
@@ -70,8 +71,18 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
                                     <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"> 19</b></a></li>
+<!--                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>-->
+<?php if(isset($_SESSION['admin'])) { ?>
+        <li><a href = "product_list.php" ><i class="menu-icon icon-list" ></i > Total Product <b class="label orange pull-right" ><?php if (isset($_SESSION['admin'])) {echo $_SESSION['number_of_row'] ;} ?></b ></a ></li >
+        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+
+        <li><a href="add_new_user.php"><i class="menu-icon icon-list"></i>Add New User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>Block User <b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
+    <?php } else { ?>
+        <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b
+                    class="label orange pull-right"> 19</b></a></li>
+    <?php } ?>
                                     <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
                                 </ul>
                                 <!--/.widget-nav-->
@@ -105,19 +116,19 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     </div>
                                     <div class="module-body">
                                         <?php if (isset($_SESSION['product_update_success']) && !empty($_SESSION['product_update_success'])) { ?>
-                                            <div class="alert alert-success">
-                                                <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
 
-                                                <strong>
-                                                    <?php
-                                                    echo $_SESSION['product_update_success'];
-                                                    unset($_SESSION['product_update_success'])
-                                                    ?>
-                                                </strong> 
+            <strong>
+                <?php
+                echo $_SESSION['product_update_success'];
+                unset($_SESSION['product_update_success'])
+                ?>
+            </strong>
 
-                                            </div>
-                                        <?php }
-                                        ?>
+        </div>
+    <?php }
+    ?>
 
                                         <br />
                                         <form action="src/Product/product_edit_process.php" method="POST" class="form-horizontal row-fluid">
@@ -126,10 +137,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="title">Product Title</label>
                                                 <div class="controls">
                                                     <input type="text" name="title" id="first_name" placeholder="Title" class="span8" value="<?php
-                                                    if (isset($product_eidt['title'])) {
-                                                        echo $product_eidt['title'];
-                                                    }
-                                                    ?>"/>
+    if (isset($product_eidt['title'])) {
+        echo $product_eidt['title'];
+    }
+    ?>"/>
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -139,10 +150,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="address">Description</label>
                                                 <div class="controls">
                                                     <textarea name="description" id="description"  class="span8" rows="5"><?php
-                                                    if (isset($product_eidt['description'])) {
-                                                        echo $product_eidt['description'];
-                                                    }
-                                                    ?></textarea>
+    if (isset($product_eidt['description'])) {
+        echo $product_eidt['description'];
+    }
+    ?></textarea>
                                                 </div>
                                             </div>
 
@@ -158,7 +169,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                     <button type="submit" class="btn">Update Product Info</button>
                                                     <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>"/>
                                                     <input type="hidden" name="id" id="id" value="<?php echo $product_eidt['id']; ?>"/>
-                                                    <input type="hidden" name="product_code" id="product_code" value="<?php echo $_GET['id'];?>"/>
+                                                    <input type="hidden" name="product_code" id="product_code" value="<?php echo $_GET['id']; ?>"/>
                                                 </div>
                                             </div>
                                         </form>

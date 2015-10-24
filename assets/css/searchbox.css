@@ -32,10 +32,10 @@
 .form-wrapper {
     min-width: 450px;
     max-width:500px;
-    padding: 15px;
-    margin: 50px auto 50px auto;
+    padding: 20px;
+    margin: 10px auto 50px auto;
     background: #444;
-    background: rgba(0,0,0,.2);
+    background: rgba(0,0,0,.3);
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;

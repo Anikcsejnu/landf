@@ -46,11 +46,11 @@ ___________________
 |  Admin User     |
 |_________________|
 => Profile Setting (done)
-=> Add new user 	
+=> Add new user (done)	
 => User list 
-	=> Eidt, delete, block 
+	=> Eidt, delete, (done)
 => Product List
-	=> Delete only 
+	=> Delete only (done)
 -------------
 Extra features 
 -------------
@@ -71,7 +71,6 @@ See all user (done)
 Delete User (done)
 Block User 
 Add user (done)
-footer copyright changed kora. 
 
 Index page : 
 ---------------
@@ -80,8 +79,8 @@ Prouct owner details of this specific product (done)
 
 User Page: 
 ----------
-Prodeuct Code Print / Save As PDF 
-Product image uploading 
+Prodeuct Code Print / Save As PDF *
+Product image uploading *
 
 Extra features: 
 --------------
@@ -93,8 +92,8 @@ Pagination of all product all user table.
 
 do later:
 admin notification option shob jaigai korte hobe. 
-menu.php page ta ke secure korte hobe.
-reapet password match korte hobe. 
-product details a owner er name thakbe. 
+menu.php page ta ke secure korte hobe.*
+reapet password match korte hobe. *
+product details a owner er name thakbe. (done)
 user detelete er shomoy confirmation message debe. 
 make md5 password

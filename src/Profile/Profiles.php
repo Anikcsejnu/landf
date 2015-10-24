@@ -42,7 +42,7 @@ class Profiles
                     ':user_id' => $this->user_id,
                     ':password' => $this->password)
             );
-
+            session_start();
             if (isset($_SESSION['admin'])) {
                 $_SESSION['user_successfully_added'] = "User successfully added";
                 header('location:../../add_new_user.php');
@@ -113,7 +113,7 @@ class Profiles
             $stmt->bindValue(':modified', $modified);
             if ($stmt->execute()) {
                 session_start();
-                $_SESSION['profile_update_success'] = "Your Profile Successfully Updated!";
+                $_SESSION['profile_update_success'] = " Successfully Updated!";
                 header('location:../../profile_edit.php?id=' . $this->user_id);
             }
         } catch (PDOException $e) {

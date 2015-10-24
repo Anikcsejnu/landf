@@ -12,6 +12,7 @@ $debug = new utility();
 if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
     $user_object = new Users();
     $user = $user_object->find_one_user_and_profile($_GET['id']);
+
 //    $debug->debug($user);
     ?>
     ﻿<!DOCTYPE html>
@@ -102,170 +103,199 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
                                         <h3>User Details</h3>
                                     </div>
                                     <div class="module-body">
-                                    <?php if (isset($user) && !empty($user)) { ?>
-        <td>
-            <dl>
-                <dt>User ID</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('id', $user) && !empty($user['id'])) {
+                                    <?php if (isset($_SESSION['profile_update_success']) && !empty($_SESSION['profile_update_success'])) { ?>
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
 
-                        echo $user['user_id'];
-                    } else {
-                        echo "User Id Not set yet";
-                    }
-                    ?>
-                </dd>
+            <strong>
+                <?php
+                echo $_SESSION['profile_update_success'];
+                unset($_SESSION['profile_update_success'])
+                ?>
+            </strong>
 
-                <dt>Username</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('username', $user) && !empty($user['username'])) {
-                        echo $user ['username'];
-                    } else {
-                        echo "No Username available";
-                    }
-                    ?>
-                </dd>
-                <dt>Email</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('email', $user) && !empty($user['email'])) {
-                        echo $user ['email'];
-                    } else {
-                        echo "No Email available";
-                    }
-                    ?>
-                </dd>
-                <dt>Password</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('password', $user) && !empty($user['password'])) {
-                        echo $user ['password'];
-                    } else {
-                        echo "No Password available";
-                    }
-                    ?>
-                </dd>
+        </div>
+    <?php }
+    ?>
+    <?php
+    if (isset($user) && !empty($user)) { ?>
+        <a href="profile_edit.php?id=<?php echo $user[0] ?>">Edit</a> |
+        <a href="src/Users/user_delete.php?id=<?php echo $user[0] ?>">Delete</a>
 
-                <dt>Is Admin?</dt>
-                <dd>
-                    <?php if ($user['is_admin'] == 1) {
-                        echo "YES";
-                    } else {
-                        echo "No";
-                    }
-                    ?>
-                </dd>
-                <dt>Created</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('created', $user) && !empty($user['created'])) {
-                        echo $user ['created'];
-                    } else {
-                        echo "No created date";
-                    }
-                    ?>
-                </dd>
-                <dt>Modified</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('modified', $user) && !empty($user['modified'])) {
-                        echo $user ['modified'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>First Name</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('first_name', $user) && !empty($user['first_name'])) {
-                        echo $user ['first_name'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>Last Name</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('last_name', $user) && !empty($user['last_name'])) {
-                        echo $user ['last_name'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>Mobile Number</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('mobile_number', $user) && !empty($user['mobile_number'])) {
-                        echo $user ['mobile_number'];
-                    } else {
-                        echo "No Mobile Number Exist";
-                    }
-                    ?>
-                </dd>
-                <dt>Address</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('address', $user) && !empty($user['address'])) {
-                        echo $user ['address'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>Zip Code</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('zip_code', $user) && !empty($user['zip_code'])) {
-                        echo $user ['zip_code'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>Zip Code</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('city', $user) && !empty($user['city'])) {
-                        echo $user ['city'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>District</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('district', $user) && !empty($user['district'])) {
-                        echo $user ['district'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
-                <dt>Profile Picture</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('profile_picture', $user) && !empty($user['profile_picture'])) {
-                        echo $user ['profile_picture'];
-                    } else {
-                        echo "Not Modified yet";
-                    }
-                    ?>
-                </dd>
+        <table class="table">
+            <tr>
+                <td>User ID</td>
+                <td><?php if (isset($user[0]) && !empty($user[0])) {
 
-                    <a href="user_list.php">List</a> |
-                    <a href="profile_edit.php?id=<?php echo $user['user_id'] ?>">Edit</a> |
-                    <a href="src/Users/user_delete.php?id=<?php echo $user['user_id'] ?>">Delete</a>
-                </dd>
-            </dl>
-        </td>
+                        echo $user[0];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><?php if (isset($user['username']) && !empty($user['username'])) {
+
+                        echo $user['username'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td><?php if (isset($user['first_name']) && !empty($user['first_name'])) {
+
+                        echo $user['first_name'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><?php if (isset($user['last_name']) && !empty($user['last_name'])) {
+
+                        echo $user['last_name'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><?php if (isset($user['email']) && !empty($user['email'])) {
+
+                        echo $user['email'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><?php if (isset($user['password']) && !empty($user['password'])) {
+
+                        echo $user['password'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Created</td>
+                <td><?php if (isset($user[5]) && !empty($user[5])) {
+
+                        echo $user[5];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Modified</td>
+                <td><?php if (isset($user['modified']) && !empty($user['modified'])) {
+
+                        echo $user['modified'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile Number</td>
+                <td><?php if (isset($user['mobile_number']) && !empty($user['mobile_number'])) {
+
+                        echo $user['mobile_number'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><?php if (isset($user['address']) && !empty($user['address'])) {
+
+                        echo $user['address'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Zip Code</td>
+                <td><?php if (isset($user['zip_code']) && !empty($user['zip_code'])) {
+
+                        echo $user['zip_code'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td><?php if (isset($user['city']) && !empty($user['city'])) {
+
+                        echo $user['city'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><?php if (isset($user['district']) && !empty($user['district'])) {
+                        echo $user['district'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <?php if (isset($user['profile_picture']) && !empty($user['profile_picture'])) { ?>
+                <tr>
+                    <td>Picture</td>
+                    <td><?php echo $user['profile_picture']; ?> </td>
+                </tr>
+            <?php } ?>
+        </table>
     <?php } else {
-        echo "<p style='color:#ff4634'>" . " Opps ! Something Going Wrong ! Please try again later" . "</p>";
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+        if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
+            $message = "Invalid product Code ! Please try again.";
+            echo "<h3 style='color: #d2322d'>" . $message . "</h3>";
+        }
+
     } ?>
                                     </div>
                                 </div>

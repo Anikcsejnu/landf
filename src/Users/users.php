@@ -45,6 +45,7 @@ class Users
                  ':is_admin'=>$this->is_admin,
                 )
             );
+            session_start();
             if(isset($_SESSION['admin'])){
                 header('location:../../user_list.php');
             }

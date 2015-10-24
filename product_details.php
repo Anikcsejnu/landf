@@ -63,7 +63,6 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == 'GET') {
 
 <div class="register-container container">
     <div class="row">
-        <br/><Br/>
 
         <form class="form-wrapper cf" action="index.php" method="POST">
             <label class="input-block-level" style="color: white;"><h4>Enter Product Code & Press Search Button</h4>

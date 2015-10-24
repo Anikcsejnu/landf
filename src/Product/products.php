@@ -102,7 +102,7 @@ class Products
             $stmt->bindValue(':description', $description);
             if ($stmt->execute()) {
                 $_SESSION['product_update_success'] = "Your Product Successfully Updated!";
-                header('location:../../product_edit.php?id=' . $product_code);
+                header('location:../../product_view.php?id=' . $product_code);
             }
         } catch (PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();

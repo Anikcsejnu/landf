@@ -105,8 +105,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     </div>
                                     <div class="module-body">
                                     <?php
-    if (isset($user_and_product) && !empty($user_and_product)) {
-        ?>
+    if (isset($user_and_product) && !empty($user_and_product)) { ?>
+        <a href="product_edit.php?id=<?php echo $user_and_product['product_code']; ?>">Edit</a> |
+        <a href="src/Product/product_delete.php?id=<?php echo $user_and_product['product_code']; ?>">Delete</a>
+        <?php ?>
         <table class="table">
             <tr>
                 <td>Product ID</td>

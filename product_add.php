@@ -3,6 +3,7 @@ require_once 'vendor/autoload.php';
 session_start();
 use App\Users\Users;
 use App\Profile\Profiles;
+use App\Product\Products;
 use App\utility;
 
 $debug = new utility();
@@ -10,9 +11,10 @@ $debug = new utility();
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $profile = new Profiles();
     $my_profile = $profile->User_Profile($_SESSION['user_id']);
-//    echo $my_profile['first_name'];
-//    $debug->debug($my_profile);
-//    die();
+
+    $product_object = new Products();
+    $latest_product = $product_object->find_one_product($_SESSION['user_id']);
+//    $debug->debug($latest_product);
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -43,7 +45,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
 
                             <ul class="nav pull-right">
 
-                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username'];?></b> </a></li>
+                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username']; ?></b> </a></li>
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>
@@ -69,10 +71,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <div class="span3">
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
-                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"> 19</b></a></li>
-                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
+                                   <?PHP
+                                        include_once "menu.php";
+                                        ?>
                                 </ul>
                                 <!--/.widget-nav-->
 
@@ -105,20 +106,55 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     </div>
                                     <div class="module-body">
                                         <?php if (isset($_SESSION['product_add_success']) && !empty($_SESSION['product_add_success'])) { ?>
-                                            <div class="alert alert-success">
-                                                <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
 
-                                                <strong>
-                                                    <?php
-                                                    echo $_SESSION['product_add_success'];
-                                                    unset($_SESSION['product_add_success']);
-                                                    ?>
-                                                    <p style="color:#00007d"><a href="product_list.php">See Your Product List</a></p>
-                                                </strong> 
+            <strong>
+                <?php
+                echo $_SESSION['product_add_success'];
+                unset($_SESSION['product_add_success']);
+                ?>
+                <p style="color:#00007d"><a href="product_list.php">See Your Product List </a></p>
 
-                                            </div>
-                                        <?php }
-                                        ?>
+            </strong>
+
+            <div style="min-height: 200px; max-width: 300px; background-color: #f5f5f5; margin: 0px auto">
+                <table class="table">
+                    <tr>
+                        <td colspan="2">
+                            <img src="assets/admin/layout3/img/mylogo2.png" style="align: justify">
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p align="justify">If you found this product please goto <a href="http://lostnfound.com">www.lostnfound.com</a> & enter the product code to find details of product owner.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Product Title</td>
+                        <td><?php echo $latest_product['title'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Product Code</td>
+                        <td><?php echo $latest_product['product_code'] ?></td>
+                    </tr>
+                    <tr>
+                        <td><br/>
+                            <button>Save as PDF</button>
+                        </td>
+                        <td><br/>
+                            <button onclick="window.print();">Print </button>&nbsp; &nbsp;
+                            <a href="product_list.php"> <button>  View List</button> </a>
+                        </TD>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+    <?php }
+    ?>
 
                                         <br />
                                         <form action="src/Product/product_add_process.php" method="POST" class="form-horizontal row-fluid">
@@ -139,13 +175,13 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 </div>
                                             </div>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="product_picture">Product Picture</label>
+<!--                                            <div class="control-group">-->
+<!--                                                <label class="control-label" for="product_picture">Product Picture</label>-->
                                                 <div class="controls">
-                                                    <input type="file" name="product_picture" id="product_picture"  class="span8">
+<!--                                                    <input type="file" name="product_picture" id="product_picture"  class="span8">-->
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
-                                            </div>
+<!--                                            </div>-->
                                             <div class="control-group">
                                                 <div class="controls">
                                                     <button type="submit" class="btn">Add Product</button>

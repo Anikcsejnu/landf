@@ -77,6 +77,7 @@ class Users
         }
     }
 
+
     public function find_all_user()
     {
         try {

@@ -8,13 +8,10 @@ use App\utility;
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $products = new Products();
-//    $products = new Products();
-
 
     if (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1)) {
         $all_products = $products->find_all_product($_SESSION['admin']);
         $_SESSION['number_of_row'] = $products->number_of_row_product();
-//        print_r($data);
     } else {
         $all_products = $products->find_all_product($_SESSION['user_id']);
     }
@@ -119,6 +116,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                             <?php
     if (isset($all_products) && !empty($all_products)) {
         $sl = 1;
+        $_SESSION['sl'] = $sl;
         foreach ($all_products as $product) {
 
 

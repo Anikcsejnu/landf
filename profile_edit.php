@@ -221,13 +221,13 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
-                                            <div class="control-group">
-                                                <label class="control-label" for="profile_picture">Profile Picture</label>
-                                                <div class="controls">
-                                                    <input type="file" name="profile_picture" id="profile_picture"  class="span8">
+<!--                                            <div class="control-group">-->
+<!--                                                <label class="control-label" for="profile_picture">Profile Picture</label>-->
+<!--                                                <div class="controls">-->
+<!--                                                    <input type="file" name="profile_picture" id="profile_picture"  class="span8">-->
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
+<!--                                                </div>-->
+<!--                                            </div>-->
                                             <div class="control-group">
                                                 <div class="controls">
                                                     <button type="submit" class="btn">Update Profile</button>

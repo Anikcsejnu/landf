@@ -203,6 +203,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                     </div>
                 </div>
+                <br/>
                 <div class="form-group">
                     <label>
                         <input type="checkbox" name="tnc"/> I agree to the <a href="#">

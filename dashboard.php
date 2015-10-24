@@ -60,10 +60,13 @@ if (!isset($_SESSION['admin'])) {
                         <div class="span3">
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
-                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"> 19</b></a></li>
-                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
+<!--                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>-->
+<!--                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>-->
+<!--                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"> 19</b></a></li>-->
+<!--                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>-->
+<?PHP
+        include_once "menu.php";
+        ?>
                                 </ul>
                                 <!--/.widget-nav-->
 

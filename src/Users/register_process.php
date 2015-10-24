@@ -19,7 +19,8 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
     $created = $_POST['created'];
     if (isset($_POST['is_admin']) && !empty($_POST['is_admin'])) {
         $is_admin = $_POST['is_admin'];
-    } else {
+    }
+    else{
         $is_admin = 0;
     }
 
@@ -28,6 +29,8 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
     //Getting the information from database for insert id to profiel table
     $result = $user->one_user_by_username($username);
     $user_id = $result['id'];
+
+
     //Inserting same users id to the profile table. 
     $id = new Profiles();
     $id->insert_id_to_profile($user_id, $password);

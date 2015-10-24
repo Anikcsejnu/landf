@@ -73,11 +73,11 @@ class Products
         }
     }
 
-    public function find_one_product($product_code)
+    public function find_one_product($product_code='')
     {
         try {
             $this->product_id = $product_code;
-            $query = "SELECT * FROM `products` WHERE product_code='$this->product_id'";
+            $query = "SELECT * FROM `products` WHERE product_code='$this->product_id' OR user_id='$this->product_id'";
             $result = $this->conn->query($query);
             foreach ($result as $row) {
                 $this->data = $row;

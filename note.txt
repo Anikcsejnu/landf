@@ -97,3 +97,4 @@ menu.php page ta ke secure korte hobe.
 reapet password match korte hobe. 
 product details a owner er name thakbe. 
 user detelete er shomoy confirmation message debe. 
+index.php te register option delete kore dea. 

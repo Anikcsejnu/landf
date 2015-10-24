@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Users;
+//session_start();
 
 class Users
 {
@@ -10,6 +11,7 @@ class Users
     public $password = '';
     public $created = '';
     public $id = '';
+    public $is_admin='';
     public $data = array();
 
     function __construct()
@@ -23,23 +25,32 @@ class Users
         echo "Profile Successfully Updated";
     }
 
-    public function create($username, $email, $password, $created)
+    public function create($username, $email, $password, $created, $is_admin)
     {
         try {
             $this->username = $username;
             $this->email = $email;
             $this->password = $password;
             $this->created = $created;
+            $this->is_admin = $is_admin;
 
-            $query = "INSERT INTO users (username, email, password, created) VALUES (:username,:email,:password,:created)";
+            $query = "INSERT INTO users (username, email, password, created, is_admin) VALUES (:username,:email,:password,:created, :is_admin)";
             $stmt = $this->conn->prepare($query);
             $stmt->execute(array(
                     ':username' => $this->username,
                     ':email' => $this->email,
                     ':password' => $this->password,
-                    ':created' => $this->created,)
+                    ':created' => $this->created,
+                 ':is_admin'=>$this->is_admin,
+                )
             );
-            header('location:../../login.php');
+            if(isset($_SESSION['admin'])){
+                header('location:../../user_list.php');
+            }
+            else{
+                header('location:../../login.php');
+            }
+
         } catch (PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();
         }

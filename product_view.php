@@ -2,6 +2,7 @@
 require_once 'vendor/autoload.php';
 session_start();
 use App\Product\Products;
+use App\Users\Users;
 use App\utility;
 
 $debug = new utility();
@@ -10,6 +11,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $product_id = $_GET['id'];
     $products = new Products();
     $row = $products->find_one_product($product_id);
+
 //    $debug->debug($row) & die();
     ?>
     ﻿<!DOCTYPE html>
@@ -31,7 +33,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-                            <i class="icon-reorder shaded"></i></a><a class="brand" href="index.html"><img src="assets/admin/layout3/img/mylogo2.png"</a>
+                            <i class="icon-reorder shaded"></i></a><a class="brand" href="dashboard.php"><img src="assets/admin/layout3/img/mylogo2.png"</a>
                         <div class="nav-collapse collapse navbar-inverse-collapse">
                             <ul class="nav nav-icons">
                                 <a href="#"><i ></i> </a></li>
@@ -66,27 +68,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     <div class="row">
                         <div class="span3">
                             <div class="sidebar">
-                                <ul class="widget widget-menu unstyled">
-                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                     <?php if (!isset($_SESSION['admin'])) { ?>
-        <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-    <?php } ?>
-                                    <?php if (isset($_SESSION['admin'])) { ?>
-        <li><a href="product_list.php"><i class="menu-icon icon-list"></i> Total Product <b
-                    class="label orange pull-right"><?php if (isset($_SESSION['admin'])) {
-                        echo $_SESSION['number_of_row'];
-                    } ?></b></a>
-        </li>
-        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-
-        <li><a href="add_new_user.php"><i class="menu-icon icon-list"></i>Add New User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>Block User <b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-    <?php } else { ?>
-        <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b
-                    class="label orange pull-right"> 19</b></a></li>
-    <?php } ?>
-                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
+                               <ul class="widget widget-menu unstyled">
+<!--                                Including Dashboard Menu-->
+                                    <?php include_once "menu.php" ?>
                                 </ul>
                                 <!--/.widget-nav-->
 

@@ -1,19 +1,18 @@
 <?php
 require_once 'vendor/autoload.php';
 session_start();
+use App\Product\Products;
 use App\Users\Users;
 use App\Profile\Profiles;
-use App\Product\Products;
 use App\utility;
 
-//echo $_GET['id'];
 $debug = new utility();
-if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    $products = new Products();
-    $product_eidt = $products->find_one_product($_GET['id']);
+//echo $_GET['id'];
 
-//    $debug->debug($my_profile);
-//    die();
+if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
+    $user_object = new Users();
+    $user = $user_object->find_one_user_and_profile($_GET['id']);
+//    $debug->debug($user);
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -69,7 +68,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     <div class="row">
                         <div class="span3">
                             <div class="sidebar">
-                                <ul class="widget widget-menu unstyled">
+                               <ul class="widget widget-menu unstyled">
 <!--                                Including Dashboard Menu-->
                                     <?php include_once "menu.php" ?>
                                 </ul>
@@ -100,67 +99,164 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                             <div class="content">
                                 <div class="module">
                                     <div class="module-head">
-                                        <h3>Edit Product</h3>
+                                        <h3>User Details</h3>
                                     </div>
                                     <div class="module-body">
-                                        <?php if (isset($_SESSION['product_update_success']) && !empty($_SESSION['product_update_success'])) { ?>
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <?php if (isset($user) && !empty($user)) { ?>
+        <td>
+            <dl>
+                <dt>User ID</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('id', $user) && !empty($user['id'])) {
 
-            <strong>
-                <?php
-                echo $_SESSION['product_update_success'];
-                unset($_SESSION['product_update_success'])
-                ?>
-            </strong>
+                        echo $user['user_id'];
+                    } else {
+                        echo "User Id Not set yet";
+                    }
+                    ?>
+                </dd>
 
-        </div>
-    <?php }
-    ?>
+                <dt>Username</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('username', $user) && !empty($user['username'])) {
+                        echo $user ['username'];
+                    } else {
+                        echo "No Username available";
+                    }
+                    ?>
+                </dd>
+                <dt>Email</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('email', $user) && !empty($user['email'])) {
+                        echo $user ['email'];
+                    } else {
+                        echo "No Email available";
+                    }
+                    ?>
+                </dd>
+                <dt>Password</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('password', $user) && !empty($user['password'])) {
+                        echo $user ['password'];
+                    } else {
+                        echo "No Password available";
+                    }
+                    ?>
+                </dd>
 
-                                        <br />
-                                        <form action="src/Product/product_edit_process.php" method="POST" class="form-horizontal row-fluid">
+                <dt>Is Admin?</dt>
+                <dd>
+                    <?php if ($user['is_admin'] == 1) {
+                        echo "YES";
+                    } else {
+                        echo "No";
+                    }
+                    ?>
+                </dd>
+                <dt>Created</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('created', $user) && !empty($user['created'])) {
+                        echo $user ['created'];
+                    } else {
+                        echo "No created date";
+                    }
+                    ?>
+                </dd>
+                <dt>Modified</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('modified', $user) && !empty($user['modified'])) {
+                        echo $user ['modified'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
+                <dt>First Name</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('first_name', $user) && !empty($user['first_name'])) {
+                        echo $user ['first_name'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
+                <dt>Mobile Number</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('mobile_number', $user) && !empty($user['mobile_number'])) {
+                        echo $user ['mobile_number'];
+                    } else {
+                        echo "No Mobile Number Exist";
+                    }
+                    ?>
+                </dd>
+                <dt>Address</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('address', $user) && !empty($user['address'])) {
+                        echo $user ['address'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
+                <dt>Zip Code</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('zip_code', $user) && !empty($user['zip_code'])) {
+                        echo $user ['zip_code'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
+                <dt>Zip Code</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('city', $user) && !empty($user['city'])) {
+                        echo $user ['city'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
+                <dt>District</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('district', $user) && !empty($user['district'])) {
+                        echo $user ['district'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
+                <dt>Profile Picture</dt>
+                <dd>
+                    <?php
+                    if (array_key_exists('profile_picture', $user) && !empty($user['profile_picture'])) {
+                        echo $user ['profile_picture'];
+                    } else {
+                        echo "Not Modified yet";
+                    }
+                    ?>
+                </dd>
 
-                                            <div class="control-group">
-                                                <label class="control-label" for="title">Product Title</label>
-                                                <div class="controls">
-                                                    <input type="text" name="title" id="first_name" placeholder="Title" class="span8" value="<?php
-    if (isset($product_eidt['title'])) {
-        echo $product_eidt['title'];
-    }
-    ?>"/>
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-
-
-                                            <div class="control-group">
-                                                <label class="control-label" for="address">Description</label>
-                                                <div class="controls">
-                                                    <textarea name="description" id="description"  class="span8" rows="5"><?php
-    if (isset($product_eidt['description'])) {
-        echo $product_eidt['description'];
-    }
-    ?></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="control-group">
-                                                <label class="control-label" for="product_picture">Product Picture</label>
-                                                <div class="controls">
-                                                    <input type="file" name="product_picture" id="product_picture"  class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <button type="submit" class="btn">Update Product Info</button>
-                                                    <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>"/>
-                                                    <input type="hidden" name="id" id="id" value="<?php echo $product_eidt['id']; ?>"/>
-                                                    <input type="hidden" name="product_code" id="product_code" value="<?php echo $_GET['id']; ?>"/>
-                                                </div>
-                                            </div>
-                                        </form>
+                    <a href="user_list.php">List</a> |
+                    <a href="profile_edit.php?id=<?php echo $user['user_id'] ?>">Edit</a> |
+                    <a href="src/Users/user_delete.php?id=<?php echo $user['user_id'] ?>">Delete</a>
+                </dd>
+            </dl>
+        </td>
+    <?php } else {
+        echo "<p style='color:#ff4634'>" . " Opps ! Something Going Wrong ! Please try again later" . "</p>";
+    } ?>
                                     </div>
                                 </div>
 

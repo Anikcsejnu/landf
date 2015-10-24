@@ -21,16 +21,19 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         $zip_code = $_POST['zip_code'];
         $city = $_POST['city'];
         $district = $_POST['district'];
-        $created = $_POST['created'];
-//$obj->debug($_REQUEST);
+        $modified = $_POST['modified'];
+        if (isset($_SESSION['admin'])) {
+            $user_id = $_POST['user_id'];
+        } else {
+            $user_id = $_SESSION['user_id'];
+        }
 
-        $user_id = $_SESSION['user_id'];
         $obj2 = new Profiles();
-        $obj2->update_profile($user_id, $first_name, $last_name, $password, $mobile_number, $address, $zip_code, $city, $district, $created);
-        
+        $obj2->update_profile($user_id, $first_name, $last_name, $password, $mobile_number, $address, $zip_code, $city, $district, $modified);
+
         $password_update = new Users();
         $password_update->update_password($user_id, $password);
-        
+
     } else {
         header('location:../../dashboard.php');
     }

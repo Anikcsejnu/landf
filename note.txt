@@ -67,7 +67,7 @@ Note:
 
 Admin Page: 
 ----------
-See all user 
+See all user (done)
 Delete User 
 Block User 
 Add user 
@@ -89,3 +89,9 @@ Profile picture upload
 Search Product from admin 
 Search User from admin 
 Pagination of all product all user table. 
+
+
+do later:
+admin notification option shob jaigai korte hobe. 
+menu.php page ta ke secure korte hobe.
+reapet password match korte hobe. 

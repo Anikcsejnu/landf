@@ -1,19 +1,21 @@
 <?php
 require_once 'vendor/autoload.php';
 session_start();
+
 use App\Users\Users;
-use App\Profile\Profiles;
 use App\Product\Products;
 use App\utility;
 
-//echo $_GET['id'];
-$debug = new utility();
-if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    $products = new Products();
-    $product_eidt = $products->find_one_product($_GET['id']);
 
-//    $debug->debug($my_profile);
+if (isset($_SESSION['admin']) && !empty($_SESSION['admin'])) {
+    $user_object = new Users();
+    $all_users = $user_object->find_all_user();
+
+
+    $debug_object = new utility();
+//    $debug_object->debug($all_users);
 //    die();
+
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -70,8 +72,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <div class="span3">
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
+
 <!--                                Including Dashboard Menu-->
-                                    <?php include_once "menu.php" ?>
+                                 <?php include_once "menu.php" ?>
                                 </ul>
                                 <!--/.widget-nav-->
 
@@ -100,67 +103,42 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                             <div class="content">
                                 <div class="module">
                                     <div class="module-head">
-                                        <h3>Edit Product</h3>
+                                        <h3>All Users</h3>
                                     </div>
                                     <div class="module-body">
-                                        <?php if (isset($_SESSION['product_update_success']) && !empty($_SESSION['product_update_success'])) { ?>
-        <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <table class="table">
+                                            <tr>
+                                            <td>SL</td>
+                                            <td>User ID</td>
+                                                <td>Username</td>
+                                                <td>is Admin?</td>
+                                                <td>Action</td>
+                                            </tr>
+                                            <?php
 
-            <strong>
-                <?php
-                echo $_SESSION['product_update_success'];
-                unset($_SESSION['product_update_success'])
-                ?>
-            </strong>
-
-        </div>
-    <?php }
-    ?>
-
-                                        <br />
-                                        <form action="src/Product/product_edit_process.php" method="POST" class="form-horizontal row-fluid">
-
-                                            <div class="control-group">
-                                                <label class="control-label" for="title">Product Title</label>
-                                                <div class="controls">
-                                                    <input type="text" name="title" id="first_name" placeholder="Title" class="span8" value="<?php
-    if (isset($product_eidt['title'])) {
-        echo $product_eidt['title'];
-    }
-    ?>"/>
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-
-
-                                            <div class="control-group">
-                                                <label class="control-label" for="address">Description</label>
-                                                <div class="controls">
-                                                    <textarea name="description" id="description"  class="span8" rows="5"><?php
-    if (isset($product_eidt['description'])) {
-        echo $product_eidt['description'];
-    }
-    ?></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="control-group">
-                                                <label class="control-label" for="product_picture">Product Picture</label>
-                                                <div class="controls">
-                                                    <input type="file" name="product_picture" id="product_picture"  class="span8">
-                                                    <!--<span class="help-inline">Minimum 5 Characters</span>-->
-                                                </div>
-                                            </div>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <button type="submit" class="btn">Update Product Info</button>
-                                                    <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>"/>
-                                                    <input type="hidden" name="id" id="id" value="<?php echo $product_eidt['id']; ?>"/>
-                                                    <input type="hidden" name="product_code" id="product_code" value="<?php echo $_GET['id']; ?>"/>
-                                                </div>
-                                            </div>
-                                        </form>
+    if (isset($all_users) && !empty($all_users)) {
+        $sl = 1;
+        foreach ($all_users as $user) {
+            ?>
+            <tr><td><?php echo $sl++ ?></td>
+                <td><?php echo $user['id'] ?></td>
+                <td><?php echo $user['username'] ?></td>
+                <td><?php if($user['is_admin']==1){echo "<b style='color:red'>"."Yes"."</b>";} else{ echo "No"; }?></td>
+                <td>
+                    <a href="user_details.php?id=<?php echo $user['id']; ?>">Details</a> |
+                    <a href="profile_edit.php?id=<?php echo $user['id'] ?>">Edit</a> |
+                    <a href="src/Users/user_delete.php?id=<?php echo $user['id'] ?>">Delete</a>
+                </td>
+            </tr>
+        <?php }
+    } else { ?>
+        <tr>
+            <td colspan="4" align="center">
+                <?php echo "<b>" . " No User Registered Yet " . "<b/>"; ?>
+            </td>
+        </tr>
+    <?php } ?>
+                                        </table>
                                     </div>
                                 </div>
 

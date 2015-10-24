@@ -2,7 +2,8 @@
 
 namespace App\Users;
 
-class Users {
+class Users
+{
 
     public $username = '';
     public $email = '';
@@ -11,15 +12,19 @@ class Users {
     public $id = '';
     public $data = array();
 
-    function __construct() {
+    function __construct()
+    {
         $this->conn = new \PDO('mysql:host=localhost;dbname=lostnfound', 'root', '');
         $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
-    public function test() {
+
+    public function test()
+    {
         echo "Profile Successfully Updated";
     }
 
-    public function create($username, $email, $password, $created) {
+    public function create($username, $email, $password, $created)
+    {
         try {
             $this->username = $username;
             $this->email = $email;
@@ -29,10 +34,10 @@ class Users {
             $query = "INSERT INTO users (username, email, password, created) VALUES (:username,:email,:password,:created)";
             $stmt = $this->conn->prepare($query);
             $stmt->execute(array(
-                ':username' => $this->username,
-                ':email' => $this->email,
-                ':password' => $this->password,
-                ':created' => $this->created,)
+                    ':username' => $this->username,
+                    ':email' => $this->email,
+                    ':password' => $this->password,
+                    ':created' => $this->created,)
             );
             header('location:../../login.php');
         } catch (PDOException $e) {
@@ -40,7 +45,8 @@ class Users {
         }
     }
 
-    public function login($username, $password) {
+    public function login($username, $password)
+    {
         $this->username = $username;
         $this->password = $password;
         try {
@@ -58,7 +64,52 @@ class Users {
         }
     }
 
-    public function one_user_by_username($username) {
+    public function find_all_user()
+    {
+        try {
+            $query = "SELECT * FROM users";
+            $result = $this->conn->query($query);
+            foreach ($result as $row) {
+                $this->data[] = $row;
+            }
+
+            return $this->data;
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
+
+    public function find_one_user_and_profile($user_id='')
+    {
+        try {
+            $this->id = $user_id;
+            $query = "SELECT * FROM `users` LEFT JOIN `profiles` ON users.id = profiles.user_id WHERE users.id='$this->id'";
+            $result = $this->conn->query($query);
+            foreach ($result as $row) {
+                $this->data = $row;
+            }
+            return $this->data;
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
+
+    public function number_of_user_count()
+    {
+        try {
+            $sql = "SELECT * FROM `users`";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->rowCount();
+            header('location:../../product_list.php');
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
+
+
+    public function one_user_by_username($username)
+    {
         $this->username = $username;
         try {
 //            $ids = mysql_real_escape_string($id);
@@ -73,7 +124,9 @@ class Users {
             echo 'ERROR: ' . $e->getMessage();
         }
     }
-    public function update_password($id, $password) {
+
+    public function update_password($id, $password)
+    {
         try {
             $this->id = $id;
             $this->password = $password;
@@ -82,7 +135,7 @@ class Users {
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':id', $id);
             $stmt->bindValue(':password', $password);
-         
+
             if ($stmt->execute()) {
                 $_SESSION['profile_update_success'] = "Your Profile Successfully Updated!";
                 header('location:../../profile_edit.php');

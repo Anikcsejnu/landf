@@ -5,10 +5,18 @@ use App\Users\Users;
 use App\Profile\Profiles;
 use App\utility;
 
+echo $_SESSION['user_id'];
 $debug = new utility();
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    $profile = new Profiles();
-    $my_profile = $profile->User_Profile($_SESSION['user_id']);
+    if (isset($_GET['id']) && !empty($_GET['id'])) {
+        $profile = new Profiles();
+        $my_profile = $profile->User_Profile($_GET['id']);
+    } else {
+        $profile = new Profiles();
+        $my_profile = $profile->User_Profile($_SESSION['user_id']);
+    }
+
+
 //    echo $my_profile['first_name'];
 //    $debug->debug($my_profile);
 //    die();
@@ -42,7 +50,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
 
                             <ul class="nav pull-right">
 
-                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username'];?></b> </a></li>
+                                <li><a href="#">Welcome, <b><?php echo $_SESSION['username']; ?></b> </a></li>
                                 <li class="nav-user dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="images/user.png" class="nav-avatar" />
                                         <b class="caret"></b></a>
@@ -68,10 +76,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <div class="span3">
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
-                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b class="label orange pull-right"> 19</b></a></li>
-                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
+<!--                                Inlucding dashboard menu-->
+                                    <?php
+    include_once "menu.php";
+    ?>
                                 </ul>
                                 <!--/.widget-nav-->
 
@@ -104,19 +112,19 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     </div>
                                     <div class="module-body">
                                         <?php if (isset($_SESSION['profile_update_success']) && !empty($_SESSION['profile_update_success'])) { ?>
-                                            <div class="alert alert-success">
-                                                <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
 
-                                                <strong>
-                                                    <?php
-                                                    echo $_SESSION['profile_update_success'];
-                                                    unset($_SESSION['profile_update_success'])
-                                                    ?>
-                                                </strong> 
+            <strong>
+                <?php
+                echo $_SESSION['profile_update_success'];
+                unset($_SESSION['profile_update_success'])
+                ?>
+            </strong>
 
-                                            </div>
-                                        <?php }
-                                        ?>
+        </div>
+    <?php }
+    ?>
 
                                         <br />
 
@@ -128,10 +136,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="first_name">First Name</label>
                                                 <div class="controls">
                                                     <input type="text" name="first_name" id="first_name" placeholder="First Name goes Here" class="span8" value="<?php
-                                                    if (isset($my_profile['first_name'])) {
-                                                        echo $my_profile['first_name'];
-                                                    }
-                                                    ?>"/>
+    if (isset($my_profile['first_name'])) {
+        echo $my_profile['first_name'];
+    }
+    ?>"/>
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -139,10 +147,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="last_name">Last Name</label>
                                                 <div class="controls">
                                                     <input type="text" name="last_name" id="last_name" value="<?php
-                                                    if (isset($my_profile['last_name'])) {
-                                                        echo $my_profile['last_name'];
-                                                    }
-                                                    ?>" placeholder="Last Name goes Here" class="span8">
+    if (isset($my_profile['last_name'])) {
+        echo $my_profile['last_name'];
+    }
+    ?>" placeholder="Last Name goes Here" class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -150,10 +158,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="password">Password</label>
                                                 <div class="controls">
                                                     <input type="password" name="password" id="password" value="<?php
-                                                    if (isset($my_profile['password'])) {
-                                                        echo $my_profile['password'];
-                                                    }
-                                                    ?>" placeholder="Put Your New Password" class="span8">
+    if (isset($my_profile['password'])) {
+        echo $my_profile['password'];
+    }
+    ?>" placeholder="Put Your New Password" class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -161,10 +169,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="mobile_number">Mobile Number</label>
                                                 <div class="controls">
                                                     <input type="text" name="mobile_number" id="mobile_number" value="<?php
-                                                    if (isset($my_profile['mobile_number'])) {
-                                                        echo $my_profile['mobile_number'];
-                                                    }
-                                                    ?>" placeholder="Ex : 01717613327" class="span8">
+    if (isset($my_profile['mobile_number'])) {
+        echo $my_profile['mobile_number'];
+    }
+    ?>" placeholder="Ex : 01717613327" class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -173,20 +181,20 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="address">Address</label>
                                                 <div class="controls">
                                                     <textarea name="address" id="address"  class="span8" rows="5"><?php
-                                                    if (isset($my_profile['address'])) {
-                                                        echo $my_profile['address'];
-                                                    }
-                                                    ?></textarea>
+    if (isset($my_profile['address'])) {
+        echo $my_profile['address'];
+    }
+    ?></textarea>
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="zip_code">Zip Code</label>
                                                 <div class="controls">
                                                     <input type="text" name="zip_code" id="zip_code" value="<?php
-                                                           if (isset($my_profile['zip_code'])) {
-                                                               echo $my_profile['zip_code'];
-                                                           }
-                                                           ?>" placeholder="Ex : 1203" class="span8">
+    if (isset($my_profile['zip_code'])) {
+        echo $my_profile['zip_code'];
+    }
+    ?>" placeholder="Ex : 1203" class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -194,10 +202,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="city">City</label>
                                                 <div class="controls">
                                                     <input type="text" name="city" id="zip_code" value="<?php
-                                                           if (isset($my_profile['city'])) {
-                                                               echo $my_profile['city'];
-                                                           }
-                                                           ?>" placeholder="Dhaka" class="span8">
+    if (isset($my_profile['city'])) {
+        echo $my_profile['city'];
+    }
+    ?>" placeholder="Dhaka" class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -205,10 +213,10 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                                 <label class="control-label" for="district">District</label>
                                                 <div class="controls">
                                                     <input type="text" name="district" id="district" value="<?php
-                                                           if (isset($my_profile['district'])) {
-                                                               echo $my_profile['district'];
-                                                           }
-                                                           ?>" placeholder="Dhaka" class="span8">
+    if (isset($my_profile['district'])) {
+        echo $my_profile['district'];
+    }
+    ?>" placeholder="Dhaka" class="span8">
                                                     <!--<span class="help-inline">Minimum 5 Characters</span>-->
                                                 </div>
                                             </div>
@@ -222,7 +230,8 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                             <div class="control-group">
                                                 <div class="controls">
                                                     <button type="submit" class="btn">Update Profile</button>
-                                                    <input type="hidden" name="created" id="created" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                                    <input type="hidden" name="modified" id="modified" value="<?php echo date('Y-m-d H:i:s'); ?>">
+                                                    <input type="hidden" name="user_id" id="user_id" value="<?php echo $my_profile['user_id']; ?>"/>
                                                 </div>
                                             </div>
                                         </form>

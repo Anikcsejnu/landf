@@ -28,7 +28,7 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
     $user_id = $result['id'];
     //Inserting same users id to the profile table. 
     $id = new Profiles();
-    $id->insert_id_to_profile($user_id, $fullName, $password, $city, $address);
+    $id->insert_id_to_profile($user_id, $password);
 } else {
     header('location:../../login.php');
 }

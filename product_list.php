@@ -2,11 +2,13 @@
 require_once 'vendor/autoload.php';
 session_start();
 use App\Product\Products;
+use App\Users\Users;
 use App\utility;
 
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $products = new Products();
+//    $products = new Products();
 
 
     if (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1)) {
@@ -73,26 +75,8 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <div class="span3">
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
-                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <?php if (!isset($_SESSION['admin'])) { ?>
-        <li><a href="product_add.php"><i class="menu-icon icon-random"></i>Add Product</a></li>
-    <?php } ?>
-    <?php if (isset($_SESSION['admin'])) { ?>
-        <li><a href="product_list.php"><i class="menu-icon icon-list"></i> Total Product <b
-                    class="label orange pull-right"><?php if (isset($_SESSION['admin'])) {
-                        echo $_SESSION['number_of_row'];
-                    } ?></b></a>
-        </li>
-        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-
-        <li><a href="add_new_user.php"><i class="menu-icon icon-list"></i>Add New User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>Block User <b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-        <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-    <?php } else { ?>
-        <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Existing Product<b
-                    class="label orange pull-right"> 19</b></a></li>
-    <?php } ?>
-                                    <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Last Added  </a></li>
+<!--                                Including Dashboard Menu-->
+                                    <?php include_once "menu.php" ?>
                                 </ul>
                                 <!--/.widget-nav-->
 
@@ -126,6 +110,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     <div class="module-body">
                                         <table class="table">
                                             <tr>
+                                            <td>SL</td>
                                             <td>Product ID</td>
                                                 <td>Product Name</td>
                                                 <td>Produt Code</td>
@@ -133,11 +118,13 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                             </tr>
                                             <?php
     if (isset($all_products) && !empty($all_products)) {
+        $sl = 1;
         foreach ($all_products as $product) {
 
 
             ?>
             <tr>
+                <td><?php echo $sl++ ?></td>
                 <td><?php echo $product['id'] ?></td>
                 <td><?php echo $product['title'] ?></td>
                 <td><?php echo $product['product_code'] ?></td>

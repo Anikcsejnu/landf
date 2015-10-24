@@ -1,10 +1,9 @@
 <?php
 require_once 'vendor/autoload.php';
+use App\Users\Users;
 use App\Product\Products;
 session_start();
 if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin']==1)) {
-    $products = new Products();
-        $_SESSION['number_of_row'] = $products->number_of_row_product();
     ?>
     ﻿<!DOCTYPE html>
     <html lang="en">
@@ -56,7 +55,7 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Your Profile</a></li>
-                                        <li><a href="#">Edit Profile</a></li>
+                                        <li><a href="profile_edit.php">Edit Profile</a></li>
                                         <li><a href="#">Account Settings</a></li>
                                         <li class="divider"></li>
                                         <li><a href="logout.php">Logout</a></li>
@@ -76,14 +75,9 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                         <div class="span3">
                             <div class="sidebar">
                                 <ul class="widget widget-menu unstyled">
-                                    <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
-                                    <li><a href="product_list.php"><i class="menu-icon icon-list"></i>Total Product<b class="label orange pull-right"><?php if (isset($_SESSION['admin'])) {echo $_SESSION['number_of_row'] ;} ?></b></a></li>
-                                    <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
 
-                                    <li><a href="add_new_user.php"><i class="menu-icon icon-list"></i>Add New User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-                                    <li><a href="user_list.php"><i class="menu-icon icon-list"></i>Block User <b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-                                    <li><a href="user_list.php"><i class="menu-icon icon-list"></i>All User<b class="label orange pull-right"><?php if (isset($_SESSION['number_of_user'])) {echo $_SESSION['number_of_user'] ;} ?></b></a></li>
-
+<!--                                Including Dashboard Menu-->
+                                 <?php include_once "menu.php" ?>
                                 </ul>
                                 <!--/.widget-nav-->
 

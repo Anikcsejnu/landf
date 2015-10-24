@@ -68,15 +68,15 @@ Note:
 Admin Page: 
 ----------
 See all user (done)
-Delete User 
+Delete User (done)
 Block User 
-Add user 
+Add user (done)
 footer copyright changed kora. 
 
 Index page : 
 ---------------
-Product search by product code
-Prouct owner details of this specific product
+Product search by product code (done)
+Prouct owner details of this specific product (done)
 
 User Page: 
 ----------
@@ -97,4 +97,4 @@ menu.php page ta ke secure korte hobe.
 reapet password match korte hobe. 
 product details a owner er name thakbe. 
 user detelete er shomoy confirmation message debe. 
-index.php te register option delete kore dea. 
+make md5 password

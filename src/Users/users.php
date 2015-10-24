@@ -12,6 +12,7 @@ class Users
     public $created = '';
     public $id = '';
     public $is_admin='';
+    public $product_code='';
     public $data = array();
 
     function __construct()
@@ -95,6 +96,23 @@ class Users
         try {
             $this->id = $user_id;
             $query = "SELECT * FROM `users` LEFT JOIN `profiles` ON users.id = profiles.user_id WHERE users.id='$this->id'";
+            $result = $this->conn->query($query);
+            foreach ($result as $row) {
+                $this->data = $row;
+            }
+            return $this->data;
+        } catch (PDOException $e) {
+            echo 'ERROR: ' . $e->getMessage();
+        }
+    }
+
+    public function find_one_user_and_product($product_code='')
+    {
+        try {
+            $this->product_code=$product_code;
+            $query = "SELECT * FROM users LEFT JOIN products ON products.user_id = users.id LEFT JOIN profiles ON profiles.user_id = products.user_id WHERE products.product_code='$this->product_code'";
+//            echo $query;
+//            die();
             $result = $this->conn->query($query);
             foreach ($result as $row) {
                 $this->data = $row;

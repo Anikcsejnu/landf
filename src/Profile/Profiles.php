@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Profile;
-session_start();
+
 
 class Profiles
 {
@@ -112,6 +112,7 @@ class Profiles
             $stmt->bindValue(':district', $district);
             $stmt->bindValue(':modified', $modified);
             if ($stmt->execute()) {
+                session_start();
                 $_SESSION['profile_update_success'] = "Your Profile Successfully Updated!";
                 header('location:../../profile_edit.php?id=' . $this->user_id);
             }

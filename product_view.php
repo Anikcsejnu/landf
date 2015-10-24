@@ -9,8 +9,10 @@ $debug = new utility();
 
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $product_id = $_GET['id'];
-    $products = new Products();
-    $row = $products->find_one_product($product_id);
+//    $products = new Products();
+//    $row = $products->find_one_product($product_id);
+    $user_object = new Users();
+    $user_and_product = $user_object->find_one_user_and_product($product_id);
 
 //    $debug->debug($row) & die();
     ?>
@@ -99,71 +101,151 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                             <div class="content">
                                 <div class="module">
                                     <div class="module-head">
-                                        <h3>All Product</h3>
+                                        <h3>View Product Details</h3>
                                     </div>
                                     <div class="module-body">
-                                    <?php if (isset($row) && !empty($row)) { ?>
-        <td>
-            <dl>
-                <dt>Product ID</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('id', $row) && !empty($row['id'])) {
-                        echo $row ['id'];
-                    } else {
-                        echo "No Description available";
-                    }
-                    ?>
-                </dd>
+                                    <?php
+    if (isset($user_and_product) && !empty($user_and_product)) {
+        ?>
+        <table class="table">
+            <tr>
+                <td>Product ID</td>
+                <td><?php if (isset($user_and_product[0]) && !empty($user_and_product[0])) {
 
-                <dt>Title</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('title', $row) && !empty($row['title'])) {
-                        echo $row ['title'];
+                        echo $user_and_product[0];
                     } else {
-                        echo "No Description available";
+                        echo "Not available";
                     }
-                    ?>
-                </dd>
-                <dt>Description</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('description', $row) && !empty($row['description'])) {
-                        echo $row ['description'];
-                    } else {
-                        echo "No Description available";
-                    }
-                    ?>
-                </dd>
-                <dt>Product Code</dt>
-                <dd>
-                    <?php
-                    if (array_key_exists('product_code', $row) && !empty($row['product_code'])) {
-                        echo $row ['product_code'];
-                    } else {
-                        echo "No product code available";
-                    }
-                    ?>
-                </dd>
 
-                <dt>Product Image</dt>
-                <dd>
-                    <?php
-                    echo "No image available";
                     ?>
-                </dd><br/>
-                <dd>
-                    <a href="product_list.php">List</a> |
-                    <a href="product_edit.php?id=<?php echo $row ['product_code']; ?>">Edit</a> |
-                    <a href="src/Product/product_delete.php?id=<?php echo $row ['product_code']; ?>">Delete</a>
-                </dd>
-            </dl>
-        </td>
-    <?php }
-    else{
-        echo "<p style='color:#ff4634'>" ." Opps ! Something Going Wrong ! Please try again later"."</p>";
-    }?>
+                </td>
+            </tr>
+            <tr>
+                <td>Product Name</td>
+                <td><?php if (isset($user_and_product['title']) && !empty($user_and_product['title'])) {
+
+                        echo $user_and_product['title'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Product Code</td>
+                <td><?php if (isset($user_and_product['product_code']) && !empty($user_and_product['product_code'])) {
+
+                        echo $user_and_product['product_code'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Owner First Name</td>
+                <td><?php if (isset($user_and_product['first_name']) && !empty($user_and_product['first_name'])) {
+
+                        echo $user_and_product['first_name'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Owner last Name</td>
+                <td><?php if (isset($user_and_product['last_name']) && !empty($user_and_product['last_name'])) {
+
+                        echo $user_and_product['last_name'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile Number</td>
+                <td><?php if (isset($user_and_product['mobile_number']) && !empty($user_and_product['mobile_number'])) {
+
+                        echo $user_and_product['mobile_number'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><?php if (isset($user_and_product['address']) && !empty($user_and_product['address'])) {
+
+                        echo $user_and_product['address'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>Zip Code</td>
+                <td><?php if (isset($user_and_product['zip_code']) && !empty($user_and_product['zip_code'])) {
+
+                        echo $user_and_product['zip_code'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td><?php if (isset($user_and_product['city']) && !empty($user_and_product['city'])) {
+
+                        echo $user_and_product['city'];
+                    } else {
+                        echo "No available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><?php if (isset($user_and_product['district']) && !empty($user_and_product['district'])) {
+                        echo $user_and_product['district'];
+                    } else {
+                        echo "Not available";
+                    }
+
+                    ?>
+                </td>
+            </tr>
+            <?php if (isset($user_and_product['profile_picture']) && !empty($user_and_product['profile_picture'])) { ?>
+                <tr>
+                    <td>Picture</td>
+                    <td><?php echo $user_and_product['profile_picture']; ?> </td>
+                </tr>
+            <?php } ?>
+        </table>
+    <?php } else {
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+        echo "<br/>";
+        if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
+            $message = "Invalid product Code ! Please try again.";
+            echo "<h3 style='color: #d2322d'>" . $message . "</h3>";
+        }
+
+    } ?>
                                     </div>
                                 </div>
 

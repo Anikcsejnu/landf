@@ -77,6 +77,14 @@ License: You must have a valid license purchased only from themeforest(the above
                 </b>
             </p>
             <form class="login-form" action="src/Users/login_process.php" method="post">
+                <p align="justify" style="color: red">
+                <?php
+                if(isset($_SESSION['user_name_not_available']) && !empty($_SESSION['user_name_not_available'])){
+                    echo $_SESSION['user_name_not_available'];
+                    unset($_SESSION['user_name_not_available']);
+                }
+                ?>
+                </p>
                 <h2 class="form-title" style="color:black;">Login to your account</h2>
                 <div class="alert alert-danger display-hide">
                     <button class="close" data-close="alert"></button>
@@ -165,6 +173,7 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- END FORGOT PASSWORD FORM -->
             <!-- BEGIN REGISTRATION FORM -->
             <form class="register-form" action="src/users/register_process.php" method="post">
+
                 <h2 style="color:black;">Sign Up</h2>
 
                 <div class="form-group">

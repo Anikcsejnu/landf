@@ -17,7 +17,7 @@ class Users
 
     function __construct()
     {
-        $this->conn = new \PDO('mysql:host=localhost;dbname=lostnfound', 'root', '');
+        $this->conn = new \PDO('mysql:host=127.0.0.1;dbname=lostnfound', 'root', '');
         $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 

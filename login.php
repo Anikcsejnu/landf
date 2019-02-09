@@ -4,20 +4,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.2
-Version: 3.6.2
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
+
 <html lang="en">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
@@ -109,7 +96,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="form-actions">
                     <label class="checkbox">
                         <input type="checkbox" name="remember" value="1"/> Remember me </label>
-                    <button type="submit" class="btn blue pull-right">
+                    <button type="submit" class="btn blue pull-right";>
                         Login <i class="m-icon-swapright m-icon-white"></i>
                     </button>
                 </div>
@@ -237,8 +224,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END LOGIN -->
         <!-- BEGIN COPYRIGHT -->
         <div class="copyright">
-            2014 &copy; Metronic - Admin Dashboard Template.
-        </div>
+            2018 &copy; Anikcsejnu </div>
         <!-- END COPYRIGHT -->
         <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         <!-- BEGIN CORE PLUGINS -->

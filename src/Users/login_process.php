@@ -13,7 +13,8 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
     $password = $_POST['password'];
 
     $user = new Users();
-    $result = $user->login($username, $password);
+   $result = $user->login($username, md5($password));
+   //$result = $user->login($username, $password);
     if (isset($result) && !empty($result)) {
 
 //        $obj->debug($result);

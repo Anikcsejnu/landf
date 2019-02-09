@@ -8,7 +8,7 @@ use App\Profile\Profiles;
 
 
 if (strtoupper($_SERVER['REQUEST_METHOD']) == 'GET') {
-    echo $_GET['product_code'];
+    //echo $_GET['product_code'];
     $user_object = new Users();
     $user_and_product = $user_object->find_one_user_and_product($_GET['product_code']);
 

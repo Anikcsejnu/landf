@@ -1,6 +1,7 @@
 <?php
 
 include_once '../../vendor/autoload.php';
+include('config.php');
 
 use App\Users\Users;
 use App\Profile\Profiles;
@@ -28,10 +29,28 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
         $_SESSION['user_name_not_available'] = "Username already taken. Please try using another username";
         header('location:../../login.php');
     } else {
-        $user->create($username, $email, $password, $created, $is_admin);
+
+
+        $to = "anikcsejnu@gmail.com";
+        $subject = "My subject";
+        $txt = "Hello world!";
+        $headers = "From: webmaster@example.com" . "\r\n" .
+        "CC: somebodyelse@example.com";
+
+        mail($to,$subject,$txt,$headers); 
+
+
+        $hashed_password = md5($password);
+
+        $user->create($username, $email, $hashed_password, $created, $is_admin);
         //Getting the information from database for insert id to profiel table
         $result = $user->one_user_by_username($username);
         $user_id = $result['id'];
+
+     
+
+       
+
     }
 
     //Inserting same users id to the profile table. 
@@ -40,3 +59,5 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == "POST") {
 } else {
     header('location:../../login.php');
 }
+
+?>

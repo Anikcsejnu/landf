@@ -113,8 +113,14 @@ class Profiles
             $stmt->bindValue(':modified', $modified);
             if ($stmt->execute()) {
                 session_start();
-                $_SESSION['profile_update_success'] = " Successfully Updated!";
-                header('location:../../profile_edit.php?id=' . $this->user_id);
+//                $_SESSION['profile_update_success'] = " Successfully Updated!";
+                if(isset($_SESSION['admin'])){
+                    header('location:../../profile_edit.php?id='.$this->user_id);
+                }else{
+                    header('location:../../profile_edit.php');
+                }
+
+
             }
         } catch (PDOException $e) {
             echo 'ERROR: ' . $e->getMessage();

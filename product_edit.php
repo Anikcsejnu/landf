@@ -51,7 +51,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     <ul class="dropdown-menu">
                                         <li><a href="profile.php?user=<?php echo $_SESSION['username']; ?>">Your Profile</a></li>
                                         <li><a href="profile_edit.php">Edit Profile</a></li>
-                                        <li><a href="account_setting.php">Account Settings</a></li>
+                                        <!--<li><a href="account_setting.php">Account Settings</a></li>-->
                                         <li class="divider"></li>
                                         <li><a href="logout.php">Logout</a></li>
                                     </ul>
@@ -76,11 +76,11 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                 <!--/.widget-nav-->
 
 
-                                <ul class="widget widget-menu unstyled">
+                                <!--<ul class="widget widget-menu unstyled">
                                     <li><a href="#"><i class="menu-icon icon-bold"></i> Share Your Experience </a></li>
                                     <li><a href="#"><i class="menu-icon icon-book"></i>Add Blog Post </a></li>
                                     <li><a href="#"><i class="menu-icon icon-paste"></i>Suggest to admin </a></li>
-                                </ul>
+                                </ul>-->
                                 <!--/.widget-nav-->
                                 <ul class="widget widget-menu unstyled">
                                     <li><a class="collapsed" data-toggle="collapse" href="#togglePages"><i class="menu-icon icon-cog">
@@ -176,7 +176,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
             <!--/.wrapper-->
             <div class="footer">
                 <div class="container">
-                    <b class="copyright">&copy; 2015 Md. Abutaleb </b>All rights reserved.
+                    <b class="copyright">&copy; 2018 Anikcsejnu </b>All rights reserved.
                 </div>
             </div>
             <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>

@@ -39,7 +39,7 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                             </form>-->
                             <ul class="nav pull-right">
                             <li><a href="">Welcome,<b> <?php echo $_SESSION['username']; ?></b> </a></li>
-                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Notification ( 10 )
+                                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Notification 
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Message-1</a></li>
@@ -56,7 +56,7 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                                     <ul class="dropdown-menu">
                                         <li><a href="#">Your Profile</a></li>
                                         <li><a href="profile_edit.php">Edit Profile</a></li>
-                                        <li><a href="#">Account Settings</a></li>
+                                        
                                         <li class="divider"></li>
                                         <li><a href="logout.php">Logout</a></li>
                                     </ul>
@@ -82,10 +82,10 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                                 <!--/.widget-nav-->
 
 
-                                <ul class="widget widget-menu unstyled">
+                                <!--<ul class="widget widget-menu unstyled">
                                     <li><a href="#"><i class="menu-icon icon-bold"></i> Send Message to Users </a></li>
                                     <li><a href="#"><i class="menu-icon icon-book"></i>Add Blog Post </a></li>
-                                </ul>
+                                </ul>-->
                                 <!--/.widget-nav-->
                                 <ul class="widget widget-menu unstyled">
                                     <li><a class="collapsed" data-toggle="collapse" href="#togglePages"><i class="menu-icon icon-cog">
@@ -108,17 +108,17 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                                     <div class="btn-box-row row-fluid">
                                         <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>65%</b>
                                             <p class="text-muted">
-                                                Growth
+                                                
                                             </p>
                                         </a>
                                         <a href="#" class="btn-box big span4"><i class="icon-user"></i><b>15</b>
                                             <p class="text-muted">
-                                                New Users
+                                             
                                             </p>
                                         </a>
                                         <a href="#" class="btn-box big span4"><i class="icon-money"></i><b>15,152</b>
                                             <p class="text-muted">
-                                                Profit
+                                               
                                             </p>
                                         </a>
                                     </div>
@@ -126,20 +126,20 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
                                         <div class="span8">
                                             <div class="row-fluid">
                                                 <div class="span12">
-                                                    <a href="#" class="btn-box small span4"><i class="icon-envelope"></i><b>Messages</b>
-                                                    </a><a href="#" class="btn-box small span4"><i class="icon-group"></i><b>Clients</b>
-                                                    </a><a href="#" class="btn-box small span4"><i class="icon-exchange"></i><b>Expenses</b>
+                                                    <a href="#" class="btn-box small span4"><i class="icon-envelope"></i><b></b>
+                                                    </a><a href="#" class="btn-box small span4"><i class="icon-group"></i><b></b>
+                                                    </a><a href="#" class="btn-box small span4"><i class="icon-exchange"></i><b></b>
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="row-fluid">
+                                            <!--<div class="row-fluid">
                                                 <div class="span12">
                                                     <a href="#" class="btn-box small span4"><i class="icon-save"></i><b>Total Sales</b>
                                                     </a><a href="#" class="btn-box small span4"><i class="icon-bullhorn"></i><b>Social Feed</b>
                                                     </a><a href="#" class="btn-box small span4"><i class="icon-sort-down"></i><b>Bounce
                                                             Rate</b> </a>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <ul class="widget widget-usage unstyled span4">
                                             <li>
@@ -225,7 +225,7 @@ if (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && ($_SESSION['admin
             <!--/.wrapper-->
             <div class="footer">
                 <div class="container">
-                    <b class="copyright">&copy; Md. Abutaleb </b>All rights reserved.
+                    <b class="copyright">&copy;2018 Anikcsejnu </b>All rights reserved.
                 </div>
             </div>
             <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>

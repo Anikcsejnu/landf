@@ -51,7 +51,7 @@ if (strtoupper($_SERVER['REQUEST_METHOD']) == 'POST') {
                 <li><a href="index.php"></a></li>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="login.php">Login</a></li>
-                <li><a href="#">FAQs</a></li>
+                <li><a href="aboutus.php">about us</a></li>
 
             </ul>
         </div>

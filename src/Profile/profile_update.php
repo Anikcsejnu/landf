@@ -28,6 +28,8 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
             $user_id = $_SESSION['user_id'];
         }
         $password_update = new Users();
+
+        $password = md5($password);
         $password_update->update_password($user_id, $password);
 
         $obj2 = new Profiles();

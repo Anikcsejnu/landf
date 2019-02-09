@@ -1,0 +1,2 @@
+$mail->Username = 'landf2020@gmail.com';
+$mail->Password = 'Anik1234';
